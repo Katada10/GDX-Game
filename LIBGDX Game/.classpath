@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LIBGDX"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-backend-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-box2d-natives.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-box2d.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-controllers-desktop-natives.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-controllers-desktop.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-controllers.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="lib/libGDX/gdx.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
