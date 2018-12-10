@@ -1,7 +1,8 @@
+package core;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 
-import core.Renderer;
+import render.Renderer;
 
 public class Game extends ApplicationAdapter{
 	private Renderer renderer;
