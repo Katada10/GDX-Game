@@ -13,7 +13,7 @@ public class Sprite {
 	
 	public Sprite(String path, String name) {
 		position = new Vector2(0, 0);
-		scale = new Vector2(200, 200);
+		scale = new Vector2(50, 50);
 		
 		this.texture = new Texture(Gdx.files.internal("assets/"+path));
 		this.name = name;

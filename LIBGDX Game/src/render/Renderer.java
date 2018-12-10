@@ -5,17 +5,26 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import core.Main;
+import game.GameMap;
 import structs.Grid;
 import structs.Sprite;
 
 public class Renderer {
 	TwoRender render;
-	Grid grid;
+	GameMap map;
 	
 	public void init()
 	{
 		render = new TwoRender();
-		grid = new Grid();
+		map = new GameMap(render);
+		
+		Sprite back = new Sprite("background.jpg", "background");
+		back.scale.x = Main.WIDTH;
+		back.scale.y = Main.HEIGHT;
+		
+		render.sprites.add(back);
+		map.drawGrid();
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 	}
