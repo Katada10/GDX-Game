@@ -6,20 +6,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import structs.Sprite;
+
 public class TwoRender {
+	
 	private SpriteBatch batch;
 	
-	private List<Texture> textures;
+	public List<Sprite> sprites;
 	
 	public TwoRender()
 	{
 		batch = new SpriteBatch();
-		textures = new ArrayList<>();
-	}
-	
-	public void addTexture(String name)
-	{
-		textures.add(new Texture(Gdx.files.internal("assets/"+name + ".jpg")));
+		sprites = new ArrayList<>();
 	}
 
 	public void render()
@@ -27,7 +25,16 @@ public class TwoRender {
 		batch.begin();
 		
 		//Need to implement "sprites" with positions
+		for (Sprite sprite : sprites) {
+			batch.draw(sprite.getTexture(), sprite.position.x, sprite.position.y, sprite.scale.x, sprite.scale.y);
+		}
 		
 		batch.end();
+	}
+	
+	public void dispose()
+	{
+		batch.dispose();
+		sprites.clear();
 	}
 }
