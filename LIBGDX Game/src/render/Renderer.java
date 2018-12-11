@@ -26,12 +26,8 @@ public class Renderer {
 		back.scale.y = Main.HEIGHT;
 		
 		render.sprites.add(back);
-		Sprite sponge = new Sprite("spongebob.png", new Vector2(Tile.sizeX, Tile.sizeY));
-		sponge.position.x = 450;
-		sponge.position.y = 500;
 		
 		map.drawGrid();
-		map.addObject(sponge);
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 	}

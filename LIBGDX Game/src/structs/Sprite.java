@@ -12,7 +12,7 @@ public class Sprite {
 	private Texture texture;
 	
 	public Sprite(String path, String name) {
-		position = new Vector2(0, 0);
+		position = new Vector2(1, 1);
 		scale = new Vector2(0, 0);
 		
 		this.texture = new Texture(Gdx.files.internal("assets/"+path));
@@ -20,7 +20,7 @@ public class Sprite {
 	}
 	
 	public Sprite(String path, Vector2 scale) {
-		position = new Vector2(0, 0);
+		position = new Vector2(1, 1);
 		this.scale = scale;
 		name = "default";
 		

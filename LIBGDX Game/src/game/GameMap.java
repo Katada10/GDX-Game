@@ -19,46 +19,10 @@ public class GameMap {
 		grid = new Grid(15, 10);
 	}
 	
-	public void addObject(Sprite sprite)
+	public void addObject(Sprite sprite, int x, int y)
 	{
-		int tileX = (int)Math.ceil(sprite.position.x);
-		int tileY = (int)Math.ceil(sprite.position.y);
-		int yIndex = 0;
-		
-		Tile[][] tiles = grid.getTiles();
-		
-		for (int i = 1; i < tiles.length; i++) {
-			//Check range
-			if(tiles[i][0].y > tileY && tileY > tiles[i-1][0].y)
-			{
-				if((tileY - tiles[i-1][0].y) > (tiles[i][0].y - tileY))
-				{
-					tileY = tiles[i][0].y;
-					yIndex = i;
-				}
-				else
-				{
-					tileY = tiles[i-1][0].y;
-					yIndex = i-1;
-				}
-			}
-		}
-		
-		for (int i = 1; i < tiles[yIndex].length; i++) {
-			Tile[] arr = tiles[yIndex];
-			
-			if(arr[i].x > tileX && tileX > arr[i-1].x)
-			{
-				if((tileX - arr[i-1].x) > (arr[i].x - tileX))
-				{
-					tileX = arr[i].x;
-				}
-				else
-				{
-					tileX = arr[i-1].x;
-				}
-			}
-		}
+		int tileX =  grid.getTiles()[ y - 1][x - 1].x;
+		int tileY = grid.getTiles()[ y - 1][x - 1].y;
 		
 		sprite.position.x = tileX;
 		sprite.position.y = tileY;
