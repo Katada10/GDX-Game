@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.badlogic.gdx.math.Vector2;
 
+import core.Main;
 import render.TwoRender;
 import structs.Grid;
 import structs.Sprite;
@@ -13,14 +14,33 @@ public class GameMap {
 	private Grid grid;
 	private List<Sprite> sprites;
 	
-	public GameMap(TwoRender render)
+	/**
+	 * Initializes a new map with grid and background file
+	 * @param render
+	 * @param backgroundName
+	 */
+	public GameMap(TwoRender render, String backgroundName)
 	{
 		this.sprites = render.sprites;
+		
+		Sprite back = new Sprite(backgroundName, new Vector2(Main.WIDTH, Main.HEIGHT));
+		render.sprites.add(back);
+		
 		grid = new Grid(15, 10);
 	}
 	
-	public void addObject(Sprite sprite, int x, int y)
+	/**
+	 * Adds the specified sprite at the specified x and y coordinate on the grid.
+	 * @param sprite
+	 * @param x
+	 * @param y
+	 */
+	
+	public void addObject(Sprite sprite)
 	{
+		int x = (int) sprite.position.x;
+		int y = (int) sprite.position.y;
+		
 		int tileX =  grid.getTiles()[ y - 1][x - 1].x;
 		int tileY = grid.getTiles()[ y - 1][x - 1].y;
 		
@@ -29,6 +49,10 @@ public class GameMap {
 		sprites.add(sprite);
 	}
 	
+	/**
+	 * Draws the tiles of the grid onto the screen
+	 * 
+	 */
 	public void drawGrid()
 	{
 		Sprite[][] sprite = new Sprite[Grid.yLen][Grid.xLen];

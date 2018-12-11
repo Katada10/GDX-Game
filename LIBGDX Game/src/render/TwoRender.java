@@ -24,7 +24,6 @@ public class TwoRender {
 	{
 		batch.begin();
 		
-		//Need to implement "sprites" with positions
 		for (Sprite sprite : sprites) {
 			batch.draw(sprite.getTexture(), sprite.position.x, sprite.position.y, sprite.scale.x, sprite.scale.y);
 		}

@@ -19,15 +19,11 @@ public class Renderer {
 	public void init()
 	{
 		render = new TwoRender();
-		map = new GameMap(render);
-		
-		Sprite back = new Sprite("background.jpg", "background");
-		back.scale.x = Main.WIDTH;
-		back.scale.y = Main.HEIGHT;
-		
-		render.sprites.add(back);
+		map = new GameMap(render, "background.jpg");
+		Sprite sponge = new Sprite("spongebob.png", new Vector2(Tile.sizeX,Tile.sizeY), 10, 10);
 		
 		map.drawGrid();
+		map.addObject(sponge);
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 	}
