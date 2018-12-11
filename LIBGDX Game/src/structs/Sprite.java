@@ -13,11 +13,19 @@ public class Sprite {
 	
 	public Sprite(String path, String name) {
 		position = new Vector2(0, 0);
-		scale = new Vector2(50, 50);
+		scale = new Vector2(0, 0);
 		
 		this.texture = new Texture(Gdx.files.internal("assets/"+path));
 		this.name = name;
 	}
+	
+	public Sprite(String path, Vector2 scale) {
+		position = new Vector2(0, 0);
+		this.scale = scale;
+		name = "default";
+		
+				
+		this.texture = new Texture(Gdx.files.internal("assets/"+path));	}
 	
 	public Texture getTexture()
 	{

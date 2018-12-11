@@ -6,13 +6,15 @@ public class Grid {
 	private Tile[][] tiles;
 	private int firstX = 0, firstY = 0;
 	
-	public static int numOfTilesX = Main.WIDTH /Tile.sizeX;
-	public static int numOfTilesY= Main.HEIGHT /Tile.sizeY;
+	public static int xLen, yLen;
 	
-	public Grid()
+	public Grid(int numOfTilesX, int numOfTilesY)
 	{
+		Tile.sizeX = Main.WIDTH / numOfTilesX;
+		Tile.sizeY = Main.HEIGHT / numOfTilesY;
+		xLen = numOfTilesX;
+		yLen = numOfTilesY;
 		
-	
 		tiles = new Tile[numOfTilesY][numOfTilesX];
 		
 		generateTiles();

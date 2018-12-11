@@ -16,7 +16,7 @@ public class GameMap {
 	public GameMap(TwoRender render)
 	{
 		this.sprites = render.sprites;
-		grid = new Grid();
+		grid = new Grid(15, 10);
 	}
 	
 	public void addObject(Sprite sprite)
@@ -67,11 +67,11 @@ public class GameMap {
 	
 	public void drawGrid()
 	{
-		Sprite[][] sprite = new Sprite[Grid.numOfTilesY][Grid.numOfTilesX];
+		Sprite[][] sprite = new Sprite[Grid.yLen][Grid.xLen];
 		
 		for (int i = 0; i < sprite.length; i++) {
 			for (int j = 0; j < sprite[i].length; j++) {
-				sprite[i][j] = new Sprite("square.png", "tile");
+				sprite[i][j] = new Sprite("square.png", new Vector2(Tile.sizeX, Tile.sizeY));
 				sprite[i][j].position.x = grid.getTiles()[i][j].x;
 				sprite[i][j].position.y = grid.getTiles()[i][j].y;
 				sprites.add(sprite[i][j]);
