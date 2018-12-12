@@ -20,7 +20,7 @@ public class Renderer {
 	{
 		render = new TwoRender();
 		map = new GameMap(render, "background.jpg");
-		Sprite sponge = new Sprite("spongebob.png", new Vector2(Tile.sizeX,Tile.sizeY), 10, 10);
+		Sprite sponge = new Sprite("spongebob.png", new Vector2(Tile.sizeX,Tile.sizeY), 10, 10, "sponge");
 		
 		map.drawGrid();
 		map.addObject(sponge);
@@ -32,6 +32,7 @@ public class Renderer {
 	{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
+		map.checkClicked();
 		render.render();
 	}
 	

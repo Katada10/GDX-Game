@@ -1,6 +1,7 @@
 package core;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 
 import render.Renderer;
 
@@ -14,6 +15,7 @@ public class Game extends ApplicationAdapter{
 	
 	@Override
 	public void create() {
+		Gdx.input.setInputProcessor(new Input());
 		renderer.init();
 	}
 

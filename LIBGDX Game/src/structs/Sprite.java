@@ -10,6 +10,8 @@ public class Sprite {
 	public Vector2 position;
 	public Vector2 scale;
 	public String name;
+	public Vector2 gridPosition;
+	
 	
 	private Texture texture;
 	
@@ -21,10 +23,11 @@ public class Sprite {
 		this.name = name;
 	}
 	
-	public Sprite(String path, Vector2 scale, int gridX, int gridY) {
-		position = new Vector2(gridX, gridY);
-		name = "default";
+	public Sprite(String path, Vector2 scale, int gridX, int gridY, String name) {
+		gridPosition = new Vector2(gridX, gridY);
+		position = new Vector2();
 		
+		this.name = name;
 		this.scale = scale;		
 		this.texture = new Texture(Gdx.files.internal("assets/"+path));	
 	}
