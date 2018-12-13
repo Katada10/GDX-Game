@@ -20,7 +20,7 @@ public class Renderer {
 	{
 		render = new TwoRender();
 		map = new GameMap(render, "background.jpg");
-		Sprite sponge = new Sprite("spongebob.png", new Vector2(Tile.sizeX,Tile.sizeY), 10, 10, "sponge");
+		Sprite sponge = new Sprite("spongebob.png", new Vector2(Tile.sizeX,Tile.sizeY), 5, 1, "sponge");
 		
 		map.drawGrid();
 		map.addObject(sponge);

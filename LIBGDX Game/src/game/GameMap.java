@@ -79,10 +79,10 @@ public class GameMap {
 		int tileX = getTileX(Input.mouseX);
 		int tileY = getTileY(Input.mouseY);
 		
+		Tile t = grid.getTiles()[tileY][tileX];
+		
 		if (Input.dragging && !selected) {
-			Tile t = grid.getTiles()[tileY][tileX];
-
-			if (!t.empty && !selected) {
+			if (!t.empty) {
 				sprite = sprites.get(t.objectIndex);
 				selected = true;
 				pPosx = tileX;
@@ -93,26 +93,31 @@ public class GameMap {
 		if (Input.dragging && selected) {
 			drag(sprite, pPosx, pPosy);
 		} 
-		
-		if(!Input.dragging && selected)	
+		else
+		{
 			selected = false;
-		
-		return;
+		}
 	}
 
 	private void drag(Sprite sprite, int tileX, int tileY) {
 		int x = getTileX(Input.mouseX);
 		int y = getTileY(Input.mouseY);
 		
+		
 		if(x != tileX)
 		{
 			sprite.position.x = grid.getTiles()[y][x].x;
+			grid.getTiles()[tileY][tileX].empty = true;
+			grid.getTiles()[y][x].empty = false;
+			grid.getTiles()[y][x].objectIndex = sprites.indexOf(sprite);
 		}
 		if(y != tileY)
 		{
 			sprite.position.y = grid.getTiles()[y][x].y;
+			grid.getTiles()[tileY][tileX].empty = true;
+			grid.getTiles()[y][x].empty = false;
+			grid.getTiles()[y][x].objectIndex = sprites.indexOf(sprite);
 		}
-		
 	}
 
 	private int getTileY(int mouseY) {
