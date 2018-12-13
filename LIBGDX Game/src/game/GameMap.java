@@ -91,6 +91,8 @@ public class GameMap {
 		}
 		
 		if (Input.dragging && selected) {
+			pPosx  = getTileX((int)sprite.position.x);
+			pPosy = getTileY((int)sprite.position.y);
 			drag(sprite, pPosx, pPosy);
 		} 
 		else
