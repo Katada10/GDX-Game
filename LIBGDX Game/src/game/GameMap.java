@@ -15,10 +15,10 @@ public class GameMap {
 	private Grid grid;
 	private List<Sprite> sprites;
 	private boolean selected = false;
-	
+
 	Sprite sprite = null;
-	int pPosx = 0, pPosy = 0; 
-	
+	int pPosx = 0, pPosy = 0;
+
 	/**
 	 * Initializes a new map with grid and background file
 	 * 
@@ -44,18 +44,18 @@ public class GameMap {
 
 	public void addObject(Sprite sprite) {
 		int x = (int) sprite.gridPosition.x;
-		int y = (int) sprite.gridPosition.y;
+		int y =  Grid.yLen - (int) sprite.gridPosition.y;
 
-		int tileX = grid.getTiles()[y - 1][x - 1].x;
-		int tileY = grid.getTiles()[y - 1][x - 1].y;
+		int tileX = grid.getTiles()[y][x - 1].x;
+		int tileY = grid.getTiles()[y][x - 1].y;
 
 		sprite.position.x = tileX;
 		sprite.position.y = tileY;
 
-		grid.getTiles()[y - 1][x - 1].empty = false;
+		grid.getTiles()[y][x - 1].empty = false;
 		sprites.add(sprite);
 
-		grid.getTiles()[y - 1][x - 1].objectIndex = sprites.indexOf(sprite);
+		grid.getTiles()[y][x - 1].objectIndex = sprites.indexOf(sprite);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class GameMap {
 
 	public void checkClicked() {
 		int tileX = getTileX(Input.mouseX);
-		int tileY = getTileY(Input.mouseY);
+		int tileY = (Grid.yLen - 1) - getTileY(Input.mouseY);
 		
 		Tile t = grid.getTiles()[tileY][tileX];
 		
@@ -89,32 +89,29 @@ public class GameMap {
 				pPosy = tileY;
 			}
 		}
-		
+
 		if (Input.dragging && selected) {
-			pPosx  = getTileX((int)sprite.position.x);
-			pPosy = getTileY((int)sprite.position.y);
+			pPosx = getTileX((int) sprite.position.x);
+			pPosy = (Grid.yLen - 1) - getTileY((int) sprite.position.y);
 			drag(sprite, pPosx, pPosy);
-		} 
-		else
-		{
+		} else {
 			selected = false;
 		}
+
 	}
 
 	private void drag(Sprite sprite, int tileX, int tileY) {
+
 		int x = getTileX(Input.mouseX);
-		int y = getTileY(Input.mouseY);
-		
-		
-		if(x != tileX)
-		{
+		int y = (Grid.yLen - 1) - getTileY(Input.mouseY);
+
+		if (x != tileX) {
 			sprite.position.x = grid.getTiles()[y][x].x;
 			grid.getTiles()[tileY][tileX].empty = true;
 			grid.getTiles()[y][x].empty = false;
 			grid.getTiles()[y][x].objectIndex = sprites.indexOf(sprite);
 		}
-		if(y != tileY)
-		{
+		if (y != tileY) {
 			sprite.position.y = grid.getTiles()[y][x].y;
 			grid.getTiles()[tileY][tileX].empty = true;
 			grid.getTiles()[y][x].empty = false;
@@ -122,23 +119,58 @@ public class GameMap {
 		}
 	}
 
-	private int getTileY(int mouseY) {
-		for (int i = 1; i < grid.getTiles().length; i++) {
-			if (mouseY > grid.getTiles()[i - 1][0].y && mouseY < grid.getTiles()[i][0].y) {
-				return Grid.yLen - i;
+	private int getTileX(int mouseX) {
+		if (mouseX >= Tile.sizeX * (grid.getTiles()[0].length - 1)
+				&& mouseX <= Tile.sizeX * (grid.getTiles()[0].length)) {
+			return (grid.getTiles()[0].length - 1);
+		}
+
+		int min = 0, max = grid.getTiles()[0].length - 1;
+		Tile[] tiles = grid.getTiles()[0];
+		int avg = 0;
+
+		for (int i = 0; i < 8; i++) {
+			int x = avg;
+			avg = (min + max) / 2;
+
+			if (x == avg) {
+				return avg;
+			}
+
+			if (tiles[avg].x < mouseX) {
+				min = avg;
+			} else if (tiles[avg].x > mouseX) {
+				max = avg;
 			}
 		}
-		return 0;
+
+		return -1;
 	}
 
-	private int getTileX(int mouseX) {
-		for (int i = 1; i < grid.getTiles().length; i++) {
-			for (int j = 1; j < grid.getTiles()[i].length; j++) {
-				if (mouseX > grid.getTiles()[i][j - 1].x && mouseX < grid.getTiles()[i][j].x) {
-					return j - 1;
-				}
+	private int getTileY(int mouseY) {
+		if (mouseY >= Tile.sizeY * (grid.getTiles().length - 1) && mouseY <= Tile.sizeY * (grid.getTiles().length)) {
+			return (grid.getTiles().length - 1);
+		}
+
+		int min = 0, max = grid.getTiles().length - 1;
+		Tile[][] tiles = grid.getTiles();
+		int avg = 0;
+
+		for (int i = 0; i < 8; i++) {
+			int x = avg;
+			avg = (min + max) / 2;
+
+			if (x == avg) {
+				return avg;
+			}
+
+			if (tiles[avg][0].y < mouseY) {
+				min = avg;
+			} else if (tiles[avg][0].y > mouseY) {
+				max = avg;
 			}
 		}
-		return Grid.xLen - 1;
+
+		return -1;
 	}
 }

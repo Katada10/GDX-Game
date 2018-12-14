@@ -2,6 +2,10 @@ package core;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
+/**
+ * @author katad
+ *
+ */
 public class Main {
 	public static final int WIDTH = 800, HEIGHT = 600;
 	
