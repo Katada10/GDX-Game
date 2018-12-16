@@ -2,12 +2,20 @@ package structs;
 
 public class Tile {
 	public int x, y;
-	public boolean empty = true;
-	public int objectIndex;
-	public static int sizeX = 50, sizeY = 50;
+	public int xCoord, yCoord;
 	
-	public Tile(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public boolean isEmpty;
+	public int objectIndex;
+	
+	public static int sizeX = 100, sizeY = 100;
+	
+	public Tile(int xCoord, int yCoord) {
+		this.xCoord = xCoord;
+		this.yCoord = yCoord;
+	
+		x = xCoord * sizeX;
+		y = yCoord * sizeY;
+		
+		isEmpty = true;
 	}
 }

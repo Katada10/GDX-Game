@@ -3,38 +3,21 @@ package structs;
 import core.Main;
 
 public class Grid {
-	private Tile[][] tiles;
-	private int firstX = 0, firstY = 0;
+	public static Tile[][] tiles;
+	public static int yLen = (Main.HEIGHT / Tile.sizeY), xLen = (Main.WIDTH / Tile.sizeX);
 	
-	public static int xLen, yLen;
-	
-	public Grid(int numOfTilesX, int numOfTilesY)
+	public static void init()
 	{
-		Tile.sizeX = Main.WIDTH / numOfTilesX;
-		Tile.sizeY = Main.HEIGHT / numOfTilesY;
-		xLen = numOfTilesX;
-		yLen = numOfTilesY;
-		
-		tiles = new Tile[numOfTilesY][numOfTilesX];
-		
-		generateTiles();
+		tiles = new Tile[yLen][xLen];
+		generate();
 	}
 	
-	private void generateTiles()
+	private static void generate()
 	{
 		for (int i = 0; i < tiles.length; i++) {
 			for (int j = 0; j < tiles[i].length; j++) {
-				tiles[i][j] = new Tile(firstX, firstY);
-				firstX += Tile.sizeX;
+				tiles[i][j] = new Tile(j, i);
 			}
-			firstY += Tile.sizeY;
-			firstX = 0;
 		}
-	}
-
-	
-	public Tile[][] getTiles()
-	{
-		return tiles;
 	}
 }

@@ -25,7 +25,7 @@ public class TwoRender {
 		batch.begin();
 		
 		for (Sprite sprite : sprites) {
-			batch.draw(sprite.getTexture(), sprite.position.x, sprite.position.y, sprite.scale.x, sprite.scale.y);
+			batch.draw(sprite.getTexture(), sprite.getPos().x, sprite.getPos().y, sprite.scale.x, sprite.scale.y);
 		}
 		
 		batch.end();

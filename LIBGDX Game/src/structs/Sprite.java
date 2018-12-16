@@ -7,42 +7,52 @@ import com.badlogic.gdx.math.Vector2;
 import core.Main;
 
 public class Sprite {
-	public Vector2 position;
 	public Vector2 scale;
-	public String name;
-	public Vector2 gridPosition;
-	
-	
+
+	private Vector2 position;
+	private Vector2 gridPosition;	
 	private Texture texture;
+
 	
-	public Sprite(String path, Vector2 scale, String name) {
-		position = new Vector2(1, 1);
+	public Sprite(String path,int gridX, int gridY) {
+		gridPosition = new Vector2(gridX, gridY);
+		scale = new Vector2(Tile.sizeX, Tile.sizeY);
+		position = new Vector2();
+
+		position.x = Grid.tiles[(int)gridPosition.y][(int)gridPosition.x].x;
+		position.y = Grid.tiles[(Grid.yLen - 1) - (int)gridPosition.y][(int)gridPosition.y].y;
 		
-		this.scale = scale;
-		this.texture = new Texture(Gdx.files.internal("assets/"+path));
-		this.name = name;
+		this.texture = new Texture(Gdx.files.internal("assets/"+path));	
 	}
 	
-	public Sprite(String path, Vector2 scale, int gridX, int gridY, String name) {
-		gridPosition = new Vector2(gridX, gridY);
+	public Sprite(String backgroundName) {
+		scale = new Vector2(Main.WIDTH, Main.HEIGHT);
 		position = new Vector2();
 		
-		this.name = name;
-		this.scale = scale;		
-		this.texture = new Texture(Gdx.files.internal("assets/"+path));	
+		this.texture = new Texture(Gdx.files.internal("assets/"+backgroundName));	
 	}
-	
-	public Sprite(String path, Vector2 scale) {
-		position = new Vector2(1, 1);
-		this.scale = scale;
-		name = "default";
-				
-		this.texture = new Texture(Gdx.files.internal("assets/"+path));	
-	}
-	
+
 	public Texture getTexture()
 	{
 		return texture;
 	}
 	
+	
+	public Vector2 getPos()
+	{
+		return position;
+	}
+
+	public void setPos(int x, int y)
+	{
+		gridPosition.x = x;
+		gridPosition.y = y;
+		
+		position.x = Grid.tiles[(int)gridPosition.y][(int)gridPosition.x].x;
+		position.y = Grid.tiles[(Grid.yLen - 1) - (int)gridPosition.y][(int)gridPosition.x].y;
+	}
+
+	public Vector2 getGridPosition() {
+		return gridPosition;
+	}
 }
