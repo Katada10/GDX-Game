@@ -71,7 +71,7 @@ public class GameMap {
 		Tile t = getTile(new Vector2(Input.mouseX, Input.mouseY));
 		Tile spriteTile = Grid.tiles[(int) sprite.getGridPosition().y][(int) sprite.getGridPosition().x];
 
-		if ((t.xCoord != spriteTile.xCoord || t.yCoord != spriteTile.yCoord) && t.isEmpty) {
+		if (t.isEmpty) {
 			if (t.xCoord != spriteTile.xCoord) {
 				sprite.setPos(t.xCoord, (int) sprite.getGridPosition().y);
 				spriteTile.isEmpty = true;
