@@ -14,7 +14,7 @@ public class Sprite {
 	private Texture texture;
 	
 	public String texName;
-	public String spriteName;
+	public String spriteTag;
 
 	
 	public Sprite(String path,int gridX, int gridY) {

@@ -22,7 +22,10 @@ public class TowerManager {
 
 		if (!t.isEmpty && Input.dragging && !towerSelected) {
 			currentTower = map.sprites.get(t.objectIndex);
-			towerSelected = true;
+		
+			if(currentTower.spriteTag == "modelTower") {
+				towerSelected = true;
+			}
 		}
 
 		if (towerSelected && Input.dragging) {
@@ -39,23 +42,19 @@ public class TowerManager {
 		Tile currentTile = Grid.tiles[(int) tower.getGridPosition().y][(int) tower.getGridPosition().x];
 
 		if (newTile.isEmpty) {
-			if (tower.spriteName == "modelTower") {
-				map.addObject(tower.texName, (int) tower.getGridPosition().x, (int) tower.getGridPosition().y, false,
-						"modelTower");
-				tower.spriteName = "default";
-			}
 			if (newTile.xCoord != currentTile.xCoord) {
 				tower.setPos(newTile.xCoord, (int) tower.getGridPosition().y);
 				currentTile.isEmpty = true;
-				newTile.isEmpty = false;
 				newTile.objectIndex = map.sprites.indexOf(tower);
 			}
-
 			if (newTile.yCoord != currentTile.yCoord) {
 				tower.setPos((int) tower.getGridPosition().x, newTile.yCoord);
 				currentTile.isEmpty = true;
-				newTile.isEmpty = false;
 				newTile.objectIndex = map.sprites.indexOf(tower);
+				if (tower.spriteTag == "modelTower") {
+					tower.spriteTag = "default";
+					map.addObject("tower.png", 4, 0, false, "modelTower");
+				}
 			}
 		}
 	}

@@ -36,7 +36,7 @@ public abstract class GameMap {
 	
 	public String addObject(String fileName, int gridX, int gridY, boolean makeEmpty, String name) {
 		Sprite sprite = new Sprite(fileName, gridX, gridY);
-		sprite.spriteName = name;
+		sprite.spriteTag = name;
 		
 		sprites.add(sprite);
 
@@ -44,10 +44,14 @@ public abstract class GameMap {
 		Grid.tiles[(int) sprite.getGridPosition().y][(int) sprite.getGridPosition().x].objectIndex = sprites
 				.indexOf(sprite);
 		
-		return sprite.spriteName;
+		return sprite.spriteTag;
 	}
 
 	private void drawGrid() {
+		for (int j = 0; j < Grid.tiles[0].length; j++) {
+			Grid.tiles[0][j].isEmpty = false;
+		}
+		
 		for (int i = 1; i < Grid.tiles.length; i++) {
 			for (int j = 0; j < Grid.tiles[i].length; j++) {
 				addObject("square.png", j, i, true);
