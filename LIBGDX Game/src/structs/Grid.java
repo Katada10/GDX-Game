@@ -1,5 +1,7 @@
 package structs;
 
+import com.badlogic.gdx.math.Vector2;
+
 import core.Main;
 
 public class Grid {
@@ -19,5 +21,12 @@ public class Grid {
 				tiles[i][j] = new Tile(j, i);
 			}
 		}
+	}
+	
+	public static Tile getTile(Vector2 mousePos) {
+		int xIndex = (int) Math.floor(mousePos.x / Tile.sizeX);
+		int yIndex = (int) Math.floor(mousePos.y / Tile.sizeY);
+
+		return Grid.tiles[yIndex][xIndex];
 	}
 }
