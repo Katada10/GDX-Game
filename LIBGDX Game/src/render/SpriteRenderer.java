@@ -9,9 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import structs.Sprite;
 
 public class SpriteRenderer {
-	
 	private SpriteBatch batch;
-	
 	
 	public void init()
 	{
@@ -22,7 +20,7 @@ public class SpriteRenderer {
 	{
 		batch.begin();
 		
-			batch.draw(sprite.getTexture(), sprite.getPos().x, sprite.getPos().y, sprite.scale.x, sprite.scale.y);
+		batch.draw(sprite.getTexture(), sprite.getPos().x, sprite.getPos().y, sprite.scale.x, sprite.scale.y);
 		
 		batch.end();
 	}

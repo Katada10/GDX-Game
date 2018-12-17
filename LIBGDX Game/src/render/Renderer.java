@@ -19,12 +19,8 @@ public class Renderer extends SpriteRenderer{
 	public void init()
 	{
 		super.init();
-		mapManager = new MapManager();
-		Sprite sponge = new Sprite("spongebob.png", 5, 1);
-		Sprite sponge2 = new Sprite("spongebob.png", 3, 1);
-		
-		mapManager.addObject(sponge, false);
-		mapManager.addObject(sponge2, false);
+		mapManager = new MapManager("background.jpg");
+		mapManager.addObjects();
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 	}
@@ -33,7 +29,7 @@ public class Renderer extends SpriteRenderer{
 	{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-		mapManager.checkClicked();
+		mapManager.update();
 		
 		for (Sprite sprite : mapManager.sprites) {
 			super.render(sprite);

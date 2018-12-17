@@ -12,17 +12,21 @@ public class Sprite {
 	private Vector2 position;
 	private Vector2 gridPosition;	
 	private Texture texture;
+	
+	public String texName;
+	public String spriteName;
 
 	
 	public Sprite(String path,int gridX, int gridY) {
 		gridPosition = new Vector2(gridX, gridY);
-		scale = new Vector2(Tile.sizeX, Tile.sizeY);
+		scale = new Vector2(Grid.tileSize, Grid.tileSize);
 		position = new Vector2();
 
 		position.x = Grid.tiles[(int)gridPosition.y][(int)gridPosition.x].x;
 		position.y = Grid.tiles[(Grid.yLen - 1) - (int)gridPosition.y][(int)gridPosition.y].y;
 		
 		this.texture = new Texture(Gdx.files.internal("assets/"+path));	
+		texName = path;
 	}
 	
 	public Sprite(String backgroundName) {

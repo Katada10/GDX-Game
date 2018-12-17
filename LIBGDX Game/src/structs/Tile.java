@@ -7,14 +7,12 @@ public class Tile {
 	public boolean isEmpty;
 	public int objectIndex;
 	
-	public static int sizeX = 100, sizeY = 100;
-	
 	public Tile(int xCoord, int yCoord) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 	
-		x = xCoord * sizeX;
-		y = yCoord * sizeY;
+		x = xCoord * Grid.tileSize;
+		y = yCoord * Grid.tileSize;
 		
 		isEmpty = true;
 	}
