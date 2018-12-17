@@ -12,14 +12,13 @@ import structs.Grid;
 import structs.Sprite;
 import structs.Tile;
 
-public class Renderer {
-	TwoRender render;
+public class Renderer extends SpriteRenderer{
 	GameMap map;
 	
 	public void init()
 	{
-		render = new TwoRender();
-		map = new GameMap(render, "background.jpg");
+		super.init();
+		map = new GameMap("background.jpg");
 		Sprite sponge = new Sprite("spongebob.png", 5, 1);
 		Sprite sponge2 = new Sprite("spongebob.png", 3, 1);
 		
@@ -35,12 +34,16 @@ public class Renderer {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 		map.checkClicked();
-		render.render();
+		
+		for (Sprite sprite : map.sprites) {
+			super.render(sprite);
+		}
 	}
 	
 	
 	public void cleanUp()
 	{
-		render.dispose();
+		super.dispose();
+		map.dispose();
 	}
 }

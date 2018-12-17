@@ -8,25 +8,21 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import structs.Sprite;
 
-public class TwoRender {
+public class SpriteRenderer {
 	
 	private SpriteBatch batch;
 	
-	public List<Sprite> sprites;
 	
-	public TwoRender()
+	public void init()
 	{
 		batch = new SpriteBatch();
-		sprites = new ArrayList<>();
 	}
 
-	public void render()
+	public void render(Sprite sprite)
 	{
 		batch.begin();
 		
-		for (Sprite sprite : sprites) {
 			batch.draw(sprite.getTexture(), sprite.getPos().x, sprite.getPos().y, sprite.scale.x, sprite.scale.y);
-		}
 		
 		batch.end();
 	}
@@ -34,6 +30,5 @@ public class TwoRender {
 	public void dispose()
 	{
 		batch.dispose();
-		sprites.clear();
 	}
 }

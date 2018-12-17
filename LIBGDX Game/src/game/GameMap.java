@@ -6,19 +6,19 @@ import com.badlogic.gdx.math.Vector2;
 
 import core.Input;
 import core.Main;
-import render.TwoRender;
+import render.SpriteRenderer;
 import structs.Grid;
 import structs.Sprite;
 import structs.Tile;
 
 public class GameMap {
-	private List<Sprite> sprites;
+	public List<Sprite> sprites;
 	Sprite sprite = null;
 	boolean selected = false;
 
-	public GameMap(TwoRender render, String backgroundName) {
-		this.sprites = render.sprites;
-
+	public GameMap(String backgroundName) {
+		sprites = new ArrayList<>();
+		
 		Sprite back = new Sprite(backgroundName);
 		sprites.add(back);
 
@@ -86,5 +86,10 @@ public class GameMap {
 				t.objectIndex = sprites.indexOf(sprite);
 			}
 		}
+	}
+	
+	public void dispose()
+	{
+		sprites.clear();
 	}
 }
