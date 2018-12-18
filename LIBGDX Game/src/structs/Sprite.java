@@ -9,7 +9,7 @@ import core.Main;
 public class Sprite {
 	public Vector2 scale;
 
-	private Vector2 position;
+	public Vector2 position;
 	private Vector2 gridPosition;	
 	private Texture texture;
 	

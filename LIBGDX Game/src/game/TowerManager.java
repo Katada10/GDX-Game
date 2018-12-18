@@ -8,20 +8,15 @@ import structs.Sprite;
 import structs.Tile;
 
 public class TowerManager {
-	private MapManager map;
 
 	Sprite currentTower = null;
 	boolean towerSelected = false;
-
-	public TowerManager(MapManager map) {
-		this.map = map;
-	}
 
 	public void update() {
 		Tile t = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
 
 		if (!t.isEmpty && Input.dragging && !towerSelected) {
-			currentTower = map.sprites.get(t.objectIndex);
+			currentTower = MapManager.sprites.get(t.objectIndex);
 		
 			if(currentTower.spriteTag == "modelTower") {
 				towerSelected = true;
@@ -45,15 +40,15 @@ public class TowerManager {
 			if (newTile.xCoord != currentTile.xCoord) {
 				tower.setPos(newTile.xCoord, (int) tower.getGridPosition().y);
 				currentTile.isEmpty = true;
-				newTile.objectIndex = map.sprites.indexOf(tower);
+				newTile.objectIndex = MapManager.sprites.indexOf(tower);
 			}
 			if (newTile.yCoord != currentTile.yCoord) {
 				tower.setPos((int) tower.getGridPosition().x, newTile.yCoord);
 				currentTile.isEmpty = true;
-				newTile.objectIndex = map.sprites.indexOf(tower);
+				newTile.objectIndex = MapManager.sprites.indexOf(tower);
 				if (tower.spriteTag == "modelTower") {
 					tower.spriteTag = "default";
-					map.addObject("tower.png", 4, 0, false, "modelTower");
+					MapManager.addObject("tower.png", 4, 0, false, "modelTower");
 				}
 			}
 		}

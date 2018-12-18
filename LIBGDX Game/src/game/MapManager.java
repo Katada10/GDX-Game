@@ -4,13 +4,16 @@ import structs.Sprite;
 
 public class MapManager extends GameMap{
 	private TowerManager towerManager;
+	private EnemyManager enemyManager;
 	
 	public MapManager(String backgroundName) {
 		super(backgroundName);
-		towerManager = new TowerManager(this);
+		towerManager = new TowerManager();
+		enemyManager = new EnemyManager();
 	}
 	
 	public void update() {
+		enemyManager.update();
 		towerManager.update();
 	}
 
