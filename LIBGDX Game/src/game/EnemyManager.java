@@ -2,6 +2,8 @@ package game;
 
 import java.util.*;
 
+import com.badlogic.gdx.Gdx;
+
 import structs.Grid;
 import structs.Path;
 import structs.Sprite;
@@ -9,7 +11,9 @@ import structs.Sprite;
 public class EnemyManager {
 	boolean waveStarted = false;
 	private List<Sprite> aliveEnemies;
-	private int waveSize = 2, spacing = 1, speed = 3;
+	private int waveSize = 2, spacing = 1, speed = 2;
+
+	boolean canSpawn = false;
 
 	private Timer timer;
 
@@ -21,12 +25,24 @@ public class EnemyManager {
 	public void update() {
 		if (!waveStarted) {
 
-			Sprite s = GameMap.addObject("chicken.png", 0, 1, true);
-			aliveEnemies.add(s);
-			
 			waveStarted = true;
+			timer.scheduleAtFixedRate(new TimerTask() {
+
+				@Override
+				public void run() {
+					canSpawn = true;
+				}
+
+			}, 0, 1000);
 
 		} else {
+
+			if (canSpawn && aliveEnemies.size() <= waveSize) {
+				Sprite s = GameMap.addObject("chicken.png", 0, 1, true);
+				aliveEnemies.add(s);
+				canSpawn = false;
+			}
+			
 			for (Sprite sprite : aliveEnemies) {
 				lead(sprite);
 			}
