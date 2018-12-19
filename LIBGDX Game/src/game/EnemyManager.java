@@ -10,8 +10,10 @@ import structs.Sprite;
 
 public class EnemyManager {
 	boolean waveStarted = false;
-	private List<Sprite> aliveEnemies;
-	private int waveSize = 2, spacing = 1, speed = 2;
+	public List<Sprite> aliveEnemies;
+	private int waveSize = 0;
+	
+	private int spacing = 1, speed = 2;
 
 	boolean canSpawn = false;
 
@@ -24,7 +26,6 @@ public class EnemyManager {
 
 	public void update() {
 		if (!waveStarted) {
-
 			waveStarted = true;
 			timer.scheduleAtFixedRate(new TimerTask() {
 
@@ -33,7 +34,7 @@ public class EnemyManager {
 					canSpawn = true;
 				}
 
-			}, 0, 1000);
+			}, 0, spacing * 1000);
 
 		} else {
 

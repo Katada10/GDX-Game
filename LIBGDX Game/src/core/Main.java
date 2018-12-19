@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args)
 	{
 		LwjglApplicationConfiguration cfg =  new LwjglApplicationConfiguration();
-		cfg.title = "Tower Defense Game";
+		cfg.title = "Dawn Of The Chickens V 0.0 Alpha";
 		cfg.width = WIDTH;
 		cfg.height = HEIGHT;
 		cfg.resizable = false;

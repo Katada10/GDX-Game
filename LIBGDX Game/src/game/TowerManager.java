@@ -1,5 +1,11 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import core.Input;
@@ -11,7 +17,18 @@ public class TowerManager {
 
 	Sprite currentTower = null;
 	boolean towerSelected = false;
+	boolean canShoot = false, timerStarted = false;
+	boolean startShooting = false;
+	
+	private List<Sprite> towers;
+	private List<Sprite> enemies;
 
+	public TowerManager(List<Sprite> liveEnemies)
+	{
+		towers = new ArrayList<>();
+		this.enemies = liveEnemies;
+	}
+	
 	public void update() {
 		Tile t = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
 
@@ -30,6 +47,28 @@ public class TowerManager {
 		if (!Input.dragging) {
 			towerSelected = false;
 		}
+		
+		
+		for (Sprite tower : towers) {
+			for (Sprite enemy : enemies) {
+				if(shouldShoot(tower, enemy))
+				{
+					//Should shoot, do something
+				}
+			}
+		}
+	}
+
+	private boolean shouldShoot(Sprite tower, Sprite enemy) {
+		int dx = Math.abs((int)(tower.position.x - enemy.position.x));
+		int dy = Math.abs((int)(tower.position.y - enemy.position.y));
+		
+		if(dx < (Grid.tileSize * 2) && dy < (Grid.tileSize * 2))
+		{
+			return true;
+		}
+		
+		return false;
 	}
 
 	public void drag(Sprite tower) {
@@ -48,6 +87,7 @@ public class TowerManager {
 				newTile.objectIndex = MapManager.sprites.indexOf(tower);
 				if (tower.spriteTag == "modelTower") {
 					tower.spriteTag = "default";
+					towers.add(tower);
 					MapManager.addObject("tower.png", 4, 0, false, "modelTower");
 				}
 			}

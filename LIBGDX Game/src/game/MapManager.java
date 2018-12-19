@@ -8,8 +8,8 @@ public class MapManager extends GameMap{
 	
 	public MapManager(String backgroundName) {
 		super(backgroundName);
-		towerManager = new TowerManager();
 		enemyManager = new EnemyManager();
+		towerManager = new TowerManager(enemyManager.aliveEnemies);
 	}
 	
 	public void update() {
