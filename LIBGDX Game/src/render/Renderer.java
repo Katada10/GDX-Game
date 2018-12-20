@@ -31,7 +31,7 @@ public class Renderer extends SpriteRenderer{
 
 		mapManager.update();
 		
-		for (Sprite sprite : mapManager.sprites) {
+		for (Sprite sprite : MapManager.sprites) {
 			super.render(sprite);
 		}
 	}

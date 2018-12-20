@@ -13,7 +13,8 @@ public class EnemyManager {
 	public List<Sprite> aliveEnemies;
 	private int waveSize = 0;
 	
-	private int spacing = 1, speed = 2;
+	private int spacing = 1;
+	public static float speed = 0.05f;
 
 	boolean canSpawn = false;
 
@@ -52,13 +53,13 @@ public class EnemyManager {
 
 	public void lead(Sprite sprite) {
 		if (Grid.getTile(sprite.position).xCoord < Path.firstSizeX) {
-			sprite.position.x += speed;
+			sprite.position.x += (speed / Gdx.graphics.getDeltaTime());
 		} else if (Grid.getTile(sprite.position).yCoord != (Grid.yLen - 1) - (Path.sizeY + 2)) {
-			sprite.position.y -= speed;
-		} else if (Grid.getTile(sprite.position).xCoord >= Path.firstSizeX
+			sprite.position.y -= (speed / Gdx.graphics.getDeltaTime());
+		} /*else if (Grid.getTile(sprite.position).xCoord >= Path.firstSizeX
 				&& Grid.getTile(sprite.position).xCoord < Grid.xLen - 1) {
 			sprite.position.x += speed;
-		}
+		}*/
 	}
 
 }

@@ -17,14 +17,19 @@ public class TowerManager {
 
 	Sprite currentTower = null;
 	boolean towerSelected = false;
-	boolean canShoot = false, timerStarted = false;
-	boolean startShooting = false;
+	
+	boolean timerStarted = false;
+	private Timer timer;
+	boolean doFire = false;
 	
 	private List<Sprite> towers;
 	private List<Sprite> enemies;
+	
+	
 
 	public TowerManager(List<Sprite> liveEnemies)
 	{
+		
 		towers = new ArrayList<>();
 		this.enemies = liveEnemies;
 	}
@@ -53,10 +58,53 @@ public class TowerManager {
 			for (Sprite enemy : enemies) {
 				if(shouldShoot(tower, enemy))
 				{
-					//Should shoot, do something
+					if(!timerStarted) {
+						timerStarted = true;
+						timer = new Timer();
+						timer.scheduleAtFixedRate(new TimerTask() {
+
+							@Override
+							public void run() {
+								doFire = true;
+								
+							}}, 0, 1000);
+					}
+					else
+					{
+						if(doFire)
+						{
+							doFire = false;
+							fireBullet(tower, enemy);
+						}
+					}
+				}
+				else
+				{
+					if(timer != null)
+					{
+						timer.cancel();
+					}
 				}
 			}
 		}
+	}
+
+	private void fireBullet(Sprite tower, Sprite enemy) {
+		Sprite bullet = new Sprite("bullet.png", (int)tower.getGridPosition().x, (int)tower.getGridPosition().y);
+		GameMap.sprites.add(bullet);
+		lead(bullet, enemy);
+	}
+
+	private void lead(Sprite bullet, Sprite enemy) {
+		double bulletVelocity = 1 / Gdx.graphics.getDeltaTime();
+		
+		float dx = Math.abs(enemy.position.x - bullet.position.x);
+		
+		double time = dx / bulletVelocity;
+		
+		double position = (EnemyManager.speed / Gdx.graphics.getDeltaTime()) * time;
+		
+		System.out.println(position + " " + enemy.position.x);
 	}
 
 	private boolean shouldShoot(Sprite tower, Sprite enemy) {
