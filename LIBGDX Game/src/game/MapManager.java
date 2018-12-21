@@ -1,6 +1,7 @@
 package game;
 
-import structs.Sprite;
+import sprites.Sprite;
+import sprites.Tower;
 
 public class MapManager extends GameMap{
 	private TowerManager towerManager;
@@ -18,7 +19,7 @@ public class MapManager extends GameMap{
 	}
 
 	public void addObjects() {
-		addObject("tower.png", 4, 0, false, "modelTower");
+		addObject(new Tower(4, 0, "modelTower"), false);
 	}
 
 }

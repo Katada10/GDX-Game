@@ -1,21 +1,20 @@
-package structs;
+package sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 import core.Main;
+import structs.Grid;
 
 public class Sprite {
 	public Vector2 scale;
 
 	public Vector2 position;
-	private Vector2 gridPosition;	
+	private Vector2 gridPosition;
 	private Texture texture;
 	
 	public String texName;
-	public String spriteTag;
-
 	
 	public Sprite(String path,int gridX, int gridY) {
 		gridPosition = new Vector2(gridX, gridY);
@@ -56,7 +55,11 @@ public class Sprite {
 		position.y = Grid.tiles[(Grid.yLen - 1) - (int)gridPosition.y][(int)gridPosition.x].y;
 	}
 
-	public Vector2 getGridPosition() {
-		return gridPosition;
+	public int getGridX() {
+		return (int)gridPosition.x;
+	}
+	
+	public int getGridY() {
+		return (int)gridPosition.y;
 	}
 }

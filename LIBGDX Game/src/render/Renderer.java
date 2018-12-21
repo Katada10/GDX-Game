@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 import core.Main;
 import game.GameMap;
 import game.MapManager;
+import sprites.Sprite;
 import structs.Grid;
-import structs.Sprite;
 import structs.Tile;
 
 public class Renderer extends SpriteRenderer{

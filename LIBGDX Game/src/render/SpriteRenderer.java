@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import structs.Sprite;
+import sprites.Sprite;
 
 public class SpriteRenderer {
 	private SpriteBatch batch;

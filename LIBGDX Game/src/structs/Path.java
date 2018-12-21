@@ -1,6 +1,7 @@
 package structs;
 
 import game.GameMap;
+import sprites.Sprite;
 
 public class Path {
 
@@ -18,11 +19,11 @@ public class Path {
 		for (int i = startTile; i < endTile; i++) {
 			if(yDirection)
 			{				
-				map.addObject("path.jpg", startLevel, i, false);
+				GameMap.addObject(new Sprite("path.jpg", startLevel, i), false);
 			}
 			else
 			{
-				map.addObject("path.jpg", i, startLevel, false);
+				GameMap.addObject(new Sprite("path.jpg", i, startLevel), false);
 			}
 		}
 	}
