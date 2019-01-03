@@ -20,14 +20,12 @@ public class TowerManager {
 	boolean towerSelected = false;
 
 	private List<Tower> towers;
-	private List<Enemy> enemies;
 	
 	Tower tower;
 
-	public TowerManager(List<Enemy> liveEnemies) {
+	public TowerManager() {
 		towers = new ArrayList<>();
-		this.enemies = liveEnemies;
-		tower = (Tower) GameMap.addObject(new Tower(1, 2, Sprite.TOWER), true);
+		tower = (Tower) GameMap.addObject(new Tower(4, 2, Sprite.TOWER), true);
 		towers.add(tower);
 	}
 
@@ -49,7 +47,7 @@ public class TowerManager {
 			towerSelected = false;
 		}
 
-		tower.shoot(enemies);
+		tower.shoot();
 	}
 
 	public void drag(Tower tower) {

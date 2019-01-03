@@ -10,7 +10,7 @@ public class MapManager extends GameMap{
 	public MapManager(String backgroundName) {
 		super(backgroundName);
 		enemyManager = new EnemyManager();
-		towerManager = new TowerManager(enemyManager.aliveEnemies);
+		towerManager = new TowerManager();
 	}
 	
 	public void update() {

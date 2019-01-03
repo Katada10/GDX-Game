@@ -11,8 +11,8 @@ import structs.Path;
 
 public class EnemyManager {
 	boolean waveStarted = false;
-	public List<Enemy> aliveEnemies;
-	private int waveSize = 1;
+	public static List<Enemy> aliveEnemies;
+	private static int waveSize = 1;
 	
 	private int spacing = 1;
 
@@ -46,7 +46,7 @@ public class EnemyManager {
 			}
 			
 			for (Enemy sprite : aliveEnemies) {
-				//lead(sprite);
+				lead(sprite);
 			}
 		}
 	}
@@ -58,8 +58,14 @@ public class EnemyManager {
 			sprite.position.y -= (sprite.speed / Gdx.graphics.getDeltaTime());
 		} else if (Grid.getTile(sprite.position).xCoord >= Path.firstSizeX
 				&& Grid.getTile(sprite.position).xCoord < Grid.xLen - 1) {
-			sprite.position.x += sprite.speed;
+			sprite.position.x += (sprite.speed / Gdx.graphics.getDeltaTime());
 		}
+	}
+
+	public static void kill(Enemy enemy) {
+		aliveEnemies.remove(enemy);
+		waveSize--;
+		
 	}
 
 }
