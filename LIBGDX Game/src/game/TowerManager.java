@@ -16,73 +16,41 @@ import structs.Grid;
 import structs.Tile;
 
 public class TowerManager {
-	Tower currentTower = null;
+	Sprite currentTower;
 	boolean towerSelected = false;
-
-	boolean timerStarted = false;
-	private Timer timer;
-	boolean doFire = false;
 
 	private List<Tower> towers;
 	private List<Enemy> enemies;
+	
+	Tower tower;
 
 	public TowerManager(List<Enemy> liveEnemies) {
-
 		towers = new ArrayList<>();
 		this.enemies = liveEnemies;
-		Tower t = (Tower)GameMap.addObject(new Tower( 1, 2), true);
-		towers.add(t);
+		tower = (Tower) GameMap.addObject(new Tower(1, 2, Sprite.TOWER), true);
+		towers.add(tower);
 	}
 
 	public void update() {
 		Tile t = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
 
 		if (!t.isEmpty && Input.dragging && !towerSelected) {
-			currentTower = (Tower) MapManager.sprites.get(t.objectIndex);
-			
-			if (currentTower.tag == "modelTower") {
+			currentTower = MapManager.sprites.get(t.objectIndex);
+			if (currentTower.type == Sprite.MODEL) {
 				towerSelected = true;
 			}
 		}
 
 		if (towerSelected && Input.dragging) {
-			drag(currentTower);
+			drag((Tower)currentTower);
 		}
 
 		if (!Input.dragging) {
 			towerSelected = false;
 		}
 
-		for (Tower tower : towers) {
-			for (Enemy enemy : enemies) {
-				if (tower.shouldShoot(enemy)) {
-					if (!timerStarted) {
-						timerStarted = true;
-						timer = new Timer();
-						timer.scheduleAtFixedRate(new TimerTask() {
-
-							@Override
-							public void run() {
-								doFire = true;
-
-							}
-						}, 0, 1000);
-					} else {
-						if (doFire) {
-							doFire = false;
-							tower.fireBullet(enemy);
-						}
-					}
-				} else {
-					if (timer != null) {
-						timer.cancel();
-					}
-				}
-			}
-		}
+		tower.shoot(enemies);
 	}
-
-	
 
 	public void drag(Tower tower) {
 		Tile newTile = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
@@ -98,10 +66,10 @@ public class TowerManager {
 				tower.setPos((int) tower.getGridX(), newTile.yCoord);
 				currentTile.isEmpty = true;
 				newTile.objectIndex = MapManager.sprites.indexOf(tower);
-				if (tower.tag == "modelTower") {
-					tower.tag = "default";
+				if (tower.type == Sprite.MODEL) {
+					tower.type = Sprite.TOWER;
 					towers.add(tower);
-					MapManager.addObject(new Tower(4, 0, "modelTower"), false);
+					MapManager.addObject(new Tower(4, 0, Sprite.MODEL), false);
 				}
 			}
 		}

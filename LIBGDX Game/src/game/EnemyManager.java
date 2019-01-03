@@ -12,7 +12,7 @@ import structs.Path;
 public class EnemyManager {
 	boolean waveStarted = false;
 	public List<Enemy> aliveEnemies;
-	private int waveSize = 0;
+	private int waveSize = 1;
 	
 	private int spacing = 1;
 
@@ -46,7 +46,7 @@ public class EnemyManager {
 			}
 			
 			for (Enemy sprite : aliveEnemies) {
-				lead(sprite);
+				//lead(sprite);
 			}
 		}
 	}
@@ -54,12 +54,12 @@ public class EnemyManager {
 	public void lead(Enemy sprite) {
 		if (Grid.getTile(sprite.position).xCoord < Path.firstSizeX) {
 			sprite.position.x += (sprite.speed / Gdx.graphics.getDeltaTime());
-		} /*else if (Grid.getTile(sprite.position).yCoord != (Grid.yLen - 1) - (Path.sizeY + 2)) {
-			sprite.position.y -= (speed / Gdx.graphics.getDeltaTime());
+		} else if (Grid.getTile(sprite.position).yCoord != (Grid.yLen - 1) - (Path.sizeY + 2)) {
+			sprite.position.y -= (sprite.speed / Gdx.graphics.getDeltaTime());
 		} else if (Grid.getTile(sprite.position).xCoord >= Path.firstSizeX
 				&& Grid.getTile(sprite.position).xCoord < Grid.xLen - 1) {
-			sprite.position.x += speed;
-		}*/
+			sprite.position.x += sprite.speed;
+		}
 	}
 
 }

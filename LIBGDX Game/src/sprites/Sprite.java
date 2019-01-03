@@ -13,8 +13,11 @@ public class Sprite {
 	public Vector2 position;
 	private Vector2 gridPosition;
 	private Texture texture;
-	
+
+	public int type = 3;
 	public String texName;
+	
+	public static final int TOWER = 0, ENEMY = 1, MODEL = 2;
 	
 	public Sprite(String path,int gridX, int gridY) {
 		gridPosition = new Vector2(gridX, gridY);

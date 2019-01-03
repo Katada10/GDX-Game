@@ -19,7 +19,7 @@ public class MapManager extends GameMap{
 	}
 
 	public void addObjects() {
-		addObject(new Tower(4, 0, "modelTower"), false);
+		addObject(new Tower(4, 0, Sprite.MODEL), false);
 	}
 
 }
