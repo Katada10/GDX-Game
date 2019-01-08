@@ -19,7 +19,7 @@ public class Renderer extends SpriteRenderer{
 	public void init()
 	{
 		super.init();
-		mapManager = new MapManager("background.jpg");
+		mapManager = new MapManager();
 		mapManager.addObjects();
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -31,8 +31,9 @@ public class Renderer extends SpriteRenderer{
 
 		mapManager.update();
 		
+		super.render(mapManager.background, true);
 		for (Sprite sprite : MapManager.sprites) {
-			super.render(sprite);
+			super.render(sprite, false);
 		}
 	}
 	

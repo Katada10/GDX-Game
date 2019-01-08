@@ -14,11 +14,11 @@ import structs.Tile;
 
 public abstract class GameMap {
 	public static List<Sprite> sprites;
+	public Sprite background;
 
 	public GameMap(String backgroundName) {
 		sprites = new ArrayList<>();
-		Sprite background = new Sprite(backgroundName);
-		sprites.add(background);
+		background = new Sprite(backgroundName);
 
 		Grid.init();
 		drawGrid();

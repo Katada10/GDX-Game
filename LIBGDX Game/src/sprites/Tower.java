@@ -1,9 +1,5 @@
 package sprites;
 
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.badlogic.gdx.Gdx;
 
 import game.EnemyManager;
@@ -12,13 +8,11 @@ import structs.Grid;
 
 public class Tower extends Sprite {
 
-	boolean didDrawBullet = false, hit = false;
+	boolean didDrawBullet = false, shouldShoot = false;
 	Sprite bullet = null;
-	int hitX = 0, hitY = 0;
 	Enemy toShoot = null;
-	boolean shouldShoot = false;
 
-	
+	private float tileRange = 2, bulletSpeed = 10;
 
 	public Tower(int gridX, int gridY, int type) {
 		super("tower.png", gridX, gridY);
@@ -31,14 +25,14 @@ public class Tower extends Sprite {
 				float distance = (float) Math
 						.sqrt(Math.pow(enemy.position.x - position.x, 2) + Math.pow(enemy.position.y - position.y, 2));
 
-				if (!didDrawBullet && distance < 150) {
+				if (!didDrawBullet && distance < Grid.tileSize * tileRange) {
 					toShoot = enemy;
 					shouldShoot = true;
 					break;
 				}
 			}
 		} else {
-			if(!didDrawBullet) {
+			if (!didDrawBullet) {
 				bullet = GameMap.addObject(new Sprite("bullet.png", this.getGridX(), this.getGridY()), true);
 				didDrawBullet = true;
 			}
@@ -48,35 +42,21 @@ public class Tower extends Sprite {
 	}
 
 	private void lead(Sprite bullet, Enemy enemy) {
-		float dx = Math.abs(enemy.position.x - bullet.position.x);
-		float dy = Math.abs(enemy.position.y - bullet.position.y);
-		float bulletSpeed = 10;
+		float dx = enemy.position.x - bullet.position.x;
+		float dy = enemy.position.y - bullet.position.y;
 
-		if (hitX == 1 && hitY == 1) {
-			hit = true;
-		}
+		bullet.position.x += (dx * Gdx.graphics.getDeltaTime()) * bulletSpeed;
+		bullet.position.y += (dy * Gdx.graphics.getDeltaTime()) * bulletSpeed;
 
-		if (!hit) {
-			if (dx > 10) {
-				bullet.position.x -= (dx * Gdx.graphics.getDeltaTime()) * bulletSpeed;
-			} else {
-				hitX = 1;
-			}
-
-			if (dy > 10) {
-				bullet.position.y += (dy * Gdx.graphics.getDeltaTime()) * bulletSpeed;
-			} else {
-				hitY = 1;
-			}
-		} else {
+		if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
 			GameMap.sprites.remove(bullet);
+
 			EnemyManager.kill(enemy);
 			GameMap.sprites.remove(enemy);
+
 			shouldShoot = false;
-			hit = false;
-			hitX = 0;
-			hitY = 0;
 			didDrawBullet = false;
 		}
+
 	}
 }

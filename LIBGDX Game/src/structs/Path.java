@@ -5,7 +5,7 @@ import sprites.Sprite;
 
 public class Path {
 
-	public static int firstSizeX = 3, secondSizeX = 4, sizeY = 3;
+	public static int firstSizeX = 1, secondSizeX = 2, sizeY = 2;
 
 	private GameMap map;
 	
@@ -30,9 +30,12 @@ public class Path {
 	
 	public void draw() {
 		drawPathSegment(1, 0, firstSizeX, false);
-		drawPathSegment(4, firstSizeX + 1, secondSizeX + (firstSizeX + 1), false);
+		drawPathSegment(sizeY + 1, firstSizeX + 1, secondSizeX + (firstSizeX + 1), false);
+		drawPathSegment(7, 4, 8, false);
 		
-		drawPathSegment(3, 1, (sizeY + 1) + 1, true);
+		
+		drawPathSegment(firstSizeX , 1, (sizeY + 1) + 1, true);
+		drawPathSegment(firstSizeX + 3 , 3, (sizeY + 1) + 4, true);
 	}
 
 }

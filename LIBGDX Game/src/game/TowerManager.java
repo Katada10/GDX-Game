@@ -25,11 +25,9 @@ public class TowerManager {
 
 	public TowerManager() {
 		towers = new ArrayList<>();
-		tower = (Tower) GameMap.addObject(new Tower(4, 2, Sprite.TOWER), true);
-		towers.add(tower);
 	}
 
-	public void update() {
+	public void update() throws Exception {
 		Tile t = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
 
 		if (!t.isEmpty && Input.dragging && !towerSelected) {
@@ -47,10 +45,12 @@ public class TowerManager {
 			towerSelected = false;
 		}
 
-		tower.shoot();
+		for (Tower tower : towers) {
+			tower.shoot();
+		}
 	}
 
-	public void drag(Tower tower) {
+	public void drag(Tower tower) throws Exception {
 		Tile newTile = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
 		Tile currentTile = Grid.tiles[(int) tower.getGridY()][(int) tower.getGridX()];
 

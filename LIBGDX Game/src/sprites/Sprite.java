@@ -8,9 +8,8 @@ import core.Main;
 import structs.Grid;
 
 public class Sprite {
-	public Vector2 scale;
-
 	public Vector2 position;
+	
 	private Vector2 gridPosition;
 	private Texture texture;
 
@@ -21,18 +20,15 @@ public class Sprite {
 	
 	public Sprite(String path,int gridX, int gridY) {
 		gridPosition = new Vector2(gridX, gridY);
-		scale = new Vector2(Grid.tileSize, Grid.tileSize);
 		position = new Vector2();
 
 		position.x = Grid.tiles[(int)gridPosition.y][(int)gridPosition.x].x;
-		position.y = Grid.tiles[(Grid.yLen - 1) - (int)gridPosition.y][(int)gridPosition.y].y;
-		
+		position.y = Grid.tiles[Grid.len - (int)gridPosition.y - 1][(int)gridPosition.x].y;
 		this.texture = new Texture(Gdx.files.internal("assets/"+path));	
 		texName = path;
 	}
 	
 	public Sprite(String backgroundName) {
-		scale = new Vector2(Main.WIDTH, Main.HEIGHT);
 		position = new Vector2();
 		
 		this.texture = new Texture(Gdx.files.internal("assets/"+backgroundName));	
@@ -55,7 +51,7 @@ public class Sprite {
 		gridPosition.y = y;
 		
 		position.x = Grid.tiles[(int)gridPosition.y][(int)gridPosition.x].x;
-		position.y = Grid.tiles[(Grid.yLen - 1) - (int)gridPosition.y][(int)gridPosition.x].y;
+		position.y = Grid.tiles[(Grid.len - 1) - (int)gridPosition.y][(int)gridPosition.x].y;
 	}
 
 	public int getGridX() {
@@ -64,5 +60,10 @@ public class Sprite {
 	
 	public int getGridY() {
 		return (int)gridPosition.y;
+	}
+	
+	public float getY()
+	{
+		return position.y;
 	}
 }
