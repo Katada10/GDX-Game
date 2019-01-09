@@ -1,19 +1,19 @@
-package game;
+package managers;
 
 import java.util.*;
 
 import com.badlogic.gdx.Gdx;
 
 import core.Main;
+import game.GameMap;
 import sprites.Enemy;
 import sprites.Sprite;
 import structs.Grid;
 import structs.Path;
 
-public class EnemyManager {
+public class EnemyManager extends IMapManager<Enemy>{
 	boolean waveStarted = false;
-	public static List<Enemy> aliveEnemies;
-	private static int waveSize = 0;
+	private static int waveSize = 4;
 
 	private int spacing = 1;
 
@@ -22,7 +22,7 @@ public class EnemyManager {
 	private Timer timer;
 
 	public EnemyManager() {
-		aliveEnemies = new ArrayList<>();
+		super();
 		timer = new Timer();
 	}
 
@@ -39,14 +39,13 @@ public class EnemyManager {
 			}, 0, spacing * 1000);
 
 		} else {
-
-			if (canSpawn && aliveEnemies.size() <= waveSize) {
+			if (canSpawn && list.size() < waveSize) {
 				Enemy s = (Enemy) GameMap.addObject(new Enemy(0, 1), true);
-				aliveEnemies.add(s);
+				list.add(s);
 				canSpawn = false;
 			}
 
-			for (Enemy sprite : aliveEnemies) {
+			for (Enemy sprite : list) {
 				lead(sprite);
 			}
 		}
@@ -54,25 +53,30 @@ public class EnemyManager {
 
 	public void lead(Enemy sprite) {
 		try {
-			if (Grid.getTile(sprite.position).xCoord < Path.firstSizeX) {
+			if(sprite.position.x < Path.firstSizeX * Grid.tileSize)
+			{
 				sprite.position.x += (sprite.speed / Gdx.graphics.getDeltaTime());
-			} else if (Grid.len - Grid.getTile(sprite.position).yCoord - 1 < 4) {
+			}
+			else if (sprite.position.y > (Path.sizeY + 2) * Grid.tileSize) {
 				sprite.position.y -= (sprite.speed / Gdx.graphics.getDeltaTime());
-			} else if (Grid.getTile(sprite.position).xCoord >= Path.firstSizeX
-					&& Grid.getTile(sprite.position).xCoord < 4) {
+			}
+			else if (sprite.position.x < (Path.firstSizeX + Path.secondSizeX + 1) * Grid.tileSize) {
 				sprite.position.x += (sprite.speed / Gdx.graphics.getDeltaTime());
-			} else if (Grid.len - Grid.getTile(sprite.position).yCoord - 1 <= 7) {
+			}
+			else if (sprite.position.y > 0) {
 				sprite.position.y -= (sprite.speed / Gdx.graphics.getDeltaTime());
+			}
+			else if (sprite.position.x < (9 - (Path.firstSizeX + Path.secondSizeX - 1)) * Grid.tileSize) {
+				sprite.position.x += (sprite.speed / Gdx.graphics.getDeltaTime());
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	public static void kill(Enemy enemy) {
-		aliveEnemies.remove(enemy);
+	public void kill(Enemy enemy) {
+		list.remove(enemy);
 		waveSize--;
-
 	}
 
 }

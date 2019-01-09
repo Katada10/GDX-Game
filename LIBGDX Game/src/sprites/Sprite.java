@@ -9,6 +9,7 @@ import structs.Grid;
 
 public class Sprite {
 	public Vector2 position;
+	public float scale;
 	
 	private Vector2 gridPosition;
 	private Texture texture;
@@ -24,6 +25,8 @@ public class Sprite {
 
 		position.x = Grid.tiles[(int)gridPosition.y][(int)gridPosition.x].x;
 		position.y = Grid.tiles[Grid.len - (int)gridPosition.y - 1][(int)gridPosition.x].y;
+		
+		scale = Grid.tileSize;
 		this.texture = new Texture(Gdx.files.internal("assets/"+path));	
 		texName = path;
 	}
@@ -31,7 +34,8 @@ public class Sprite {
 	public Sprite(String backgroundName) {
 		position = new Vector2();
 		
-		this.texture = new Texture(Gdx.files.internal("assets/"+backgroundName));	
+		this.texture = new Texture(Gdx.files.internal("assets/"+backgroundName));
+		scale = Main.SCALE;
 	}
 
 	public Texture getTexture()

@@ -12,8 +12,6 @@ import structs.Grid;
 
 public class SpriteRenderer {
 	private SpriteBatch batch;
-	private float objectScale = Grid.tileSize;
-	
 	
 	public void init()
 	{
@@ -21,21 +19,11 @@ public class SpriteRenderer {
 		
 	}
 
-	public void render(Sprite sprite, boolean isBackground)
+	public void render(Sprite sprite)
 	{
 		batch.begin();
 		
-		if(isBackground)
-		{
-			objectScale = Main.SCALE;
-		}
-		else
-		{
-			objectScale = Grid.tileSize;
-		}
-		
-		batch.draw(sprite.getTexture(), sprite.getPos().x, sprite.getPos().y, objectScale, objectScale);
-		
+		batch.draw(sprite.getTexture(), sprite.getPos().x, sprite.getPos().y, sprite.scale, sprite.scale);
 		
 		batch.end();
 	}

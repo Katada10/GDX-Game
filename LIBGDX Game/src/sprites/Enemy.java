@@ -5,9 +5,8 @@ public class Enemy extends Sprite{
 	
 	public Enemy(int gridX, int gridY) {
 		super("chicken.png", gridX, gridY);
-		speed = 0.04f;
+		speed = 0.05f;
 		type = ENEMY;
 	}
-	
 
 }
