@@ -19,11 +19,11 @@ public class Path {
 		for (int i = startTile; i < endTile; i++) {
 			if(yDirection)
 			{				
-				GameMap.addObject(new Sprite("path.jpg", startLevel, i), false);
+				GameMap.addObject(new Sprite("path.jpg", startLevel, i));
 			}
 			else
 			{
-				GameMap.addObject(new Sprite("path.jpg", i, startLevel), false);
+				GameMap.addObject(new Sprite("path.jpg", i, startLevel));
 			}
 		}
 	}

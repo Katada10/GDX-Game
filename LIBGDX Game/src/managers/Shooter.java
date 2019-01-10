@@ -21,7 +21,6 @@ public class Shooter {
 	
 	private float tileRange = 2;
 	
-	
 	public Shooter(List<Tower> towers, List<Enemy> enemies) {
 		this.towers = towers;
 		this.enemies = enemies;
@@ -48,7 +47,7 @@ public class Shooter {
 			}
 		} else {
 			if (!didDrawBullet) {
-				bullet = GameMap.addObject(new Sprite("bullet.png", tower.getGridX(), tower.getGridY()), true);
+				bullet = GameMap.addObject(new Sprite("bullet.png", tower.getGridX(), tower.getGridY()));
 				didDrawBullet = true;
 			}
 
@@ -67,8 +66,8 @@ public class Shooter {
 
 		if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
 			GameMap.sprites.remove(bullet);
-
 			GameMap.sprites.remove(enemy);
+			enemies.remove(enemy);
 
 			shouldShoot = false;
 			didDrawBullet = false;

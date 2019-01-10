@@ -12,13 +12,9 @@ import structs.Grid;
 import structs.Path;
 
 public class EnemyManager extends IMapManager<Enemy>{
-	boolean waveStarted = false;
-	private static int waveSize = 4;
-
-	private int spacing = 1;
-
-	boolean canSpawn = false;
-
+	boolean waveStarted = false, canSpawn = false;
+	private static int waveSize = 4, spacing = 1, counter = 0;
+	
 	private Timer timer;
 
 	public EnemyManager() {
@@ -39,8 +35,9 @@ public class EnemyManager extends IMapManager<Enemy>{
 			}, 0, spacing * 1000);
 
 		} else {
-			if (canSpawn && list.size() < waveSize) {
-				Enemy s = (Enemy) GameMap.addObject(new Enemy(0, 1), true);
+			if (canSpawn && counter < waveSize) {
+				counter++;
+				Enemy s = (Enemy) GameMap.addObject(new Enemy(0, 1));
 				list.add(s);
 				canSpawn = false;
 			}
@@ -72,11 +69,6 @@ public class EnemyManager extends IMapManager<Enemy>{
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	}
-
-	public void kill(Enemy enemy) {
-		list.remove(enemy);
-		waveSize--;
 	}
 
 }

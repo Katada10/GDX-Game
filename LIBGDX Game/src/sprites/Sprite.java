@@ -9,9 +9,10 @@ import structs.Grid;
 
 public class Sprite {
 	public Vector2 position;
+	private Vector2 gridPosition;	
+	
 	public float scale;
 	
-	private Vector2 gridPosition;
 	private Texture texture;
 
 	public int type = 3;

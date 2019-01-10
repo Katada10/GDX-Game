@@ -27,37 +27,29 @@ public class GameMap {
 		sprites = new ArrayList<>();
 		sprites.add(new Sprite("background.jpg"));
 
-		
 		Grid.init();
+		addObject(new Tower(4, 0, Sprite.MODEL));
+		
+		new Path(this).draw();
 		drawGrid();
 	
-		new Path(this).draw();
-		
-		addObject(new Tower(4, 0, Sprite.MODEL), false);
 		
 		enemyManager = new EnemyManager();
 		towerManager = new TowerManager();
 		shooter = new Shooter(towerManager.list, enemyManager.list);
 	}
 
-	public static Sprite addObject(Sprite sprite, boolean makeEmpty) {
+	public static Sprite addObject(Sprite sprite) {
 		sprites.add(sprite);
-
-		Grid.tiles[(int) sprite.getGridY()][(int) sprite.getGridX()].isEmpty = makeEmpty;
-		Grid.tiles[(int) sprite.getGridY()][(int) sprite.getGridX()].objectIndex = sprites
-				.indexOf(sprite);
 		
 		return sprite;
 	}
 	
 	private void drawGrid() {
-		for (int j = 0; j < Grid.tiles[0].length; j++) {
-			Grid.tiles[0][j].isEmpty = false;
-		}
 		
 		for (int i = 1; i < Grid.tiles.length; i++) {
 			for (int j = 0; j < Grid.tiles[i].length; j++) {
-				addObject(new Sprite("square.png", j, i), true);
+				addObject(new Sprite("square.png", j, i));
 			}
 		}
 	}
