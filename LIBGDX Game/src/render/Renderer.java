@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import core.Main;
-import game.GameMap;
+import map.GameMap;
 import sprites.Sprite;
 import structs.Grid;
 import structs.Tile;

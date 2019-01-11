@@ -5,15 +5,15 @@ import java.util.*;
 import com.badlogic.gdx.Gdx;
 
 import core.Main;
-import game.GameMap;
+import map.GameMap;
 import sprites.Enemy;
 import sprites.Sprite;
 import structs.Grid;
 import structs.Path;
 
-public class EnemyManager extends IMapManager<Enemy>{
+public class EnemyManager extends IManager<Enemy>{
 	boolean waveStarted = false, canSpawn = false;
-	private static int waveSize = 4, spacing = 1, counter = 0;
+	private static int waveSize = 5, spacing = 1, counter = 0;
 	
 	private Timer timer;
 

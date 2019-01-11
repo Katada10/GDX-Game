@@ -3,13 +3,13 @@ package managers;
 import com.badlogic.gdx.math.Vector2;
 
 import core.Input;
-import game.GameMap;
+import map.GameMap;
 import sprites.Sprite;
 import sprites.Tower;
 import structs.Grid;
 import structs.Tile;
 
-public class TowerManager extends IMapManager<Tower> {
+public class TowerManager extends IManager<Tower> {
 	boolean towerSelected = false;
 	Tower toDrag = null;
 

@@ -1,4 +1,4 @@
-package game;
+package map;
 
 import java.util.*;
 
@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import core.Input;
 import core.Main;
 import managers.EnemyManager;
-import managers.Shooter;
+import managers.BulletManager;
 import managers.TowerManager;
 import render.SpriteRenderer;
 import sprites.Sprite;
@@ -21,7 +21,7 @@ public class GameMap {
 	
 	public TowerManager towerManager;
 	public EnemyManager enemyManager;
-	Shooter shooter;
+	BulletManager shooter;
 
 	public GameMap() {
 		sprites = new ArrayList<>();
@@ -36,7 +36,7 @@ public class GameMap {
 		
 		enemyManager = new EnemyManager();
 		towerManager = new TowerManager();
-		shooter = new Shooter(towerManager.list, enemyManager.list);
+		shooter = new BulletManager(towerManager.list, enemyManager.list);
 	}
 
 	public static Sprite addObject(Sprite sprite) {

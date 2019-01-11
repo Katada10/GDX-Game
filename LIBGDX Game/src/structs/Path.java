@@ -1,6 +1,6 @@
 package structs;
 
-import game.GameMap;
+import map.GameMap;
 import sprites.Sprite;
 
 public class Path {

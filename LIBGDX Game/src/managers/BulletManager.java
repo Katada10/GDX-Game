@@ -4,24 +4,23 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 
-import game.GameMap;
+import map.GameMap;
 import sprites.Enemy;
 import sprites.Sprite;
 import sprites.Tower;
 import structs.Grid;
 
-public class Shooter {
+public class BulletManager {
 	
 	private List<Tower> towers;
 	private List<Enemy> enemies;
 	
-	private boolean shouldShoot = false, didDrawBullet = false;
 	private Enemy toShoot;
 	private Sprite bullet;
 	
 	private float tileRange = 2;
 	
-	public Shooter(List<Tower> towers, List<Enemy> enemies) {
+	public BulletManager(List<Tower> towers, List<Enemy> enemies) {
 		this.towers = towers;
 		this.enemies = enemies;
 	}
@@ -34,28 +33,28 @@ public class Shooter {
 	}
 
 	private void shoot(Tower tower, List<Enemy> enemies) {
-		if (!shouldShoot) {
+		if (!tower.shouldShoot) {
 			for (Enemy enemy : enemies) {
 				float distance = (float) Math
 						.sqrt(Math.pow(enemy.position.x - tower.position.x, 2) + Math.pow(enemy.position.y - tower.position.y, 2));
 
-				if (!didDrawBullet && distance < Grid.tileSize * tileRange) {
+				if (!tower.didDrawBullet && distance < Grid.tileSize * tileRange) {
 					toShoot = enemy;
-					shouldShoot = true;
+					tower.shouldShoot = true;
 					break;
 				}
 			}
 		} else {
-			if (!didDrawBullet) {
+			if (!tower.didDrawBullet) {
 				bullet = GameMap.addObject(new Sprite("bullet.png", tower.getGridX(), tower.getGridY()));
-				didDrawBullet = true;
+				tower.didDrawBullet = true;
 			}
 
-			lead(bullet, toShoot);
+			lead(tower, bullet, toShoot);
 		}
 	}
 
-	private void lead(Sprite bullet, Enemy enemy) {
+	private void lead(Tower tower, Sprite bullet, Enemy enemy) {
 		float dx = enemy.position.x - bullet.position.x;
 		float dy = enemy.position.y - bullet.position.y;
 		
@@ -69,8 +68,8 @@ public class Shooter {
 			GameMap.sprites.remove(enemy);
 			enemies.remove(enemy);
 
-			shouldShoot = false;
-			didDrawBullet = false;
+			tower.shouldShoot = false;
+			tower.didDrawBullet = false;
 		}
 	}
 }

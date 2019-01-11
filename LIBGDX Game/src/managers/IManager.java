@@ -10,10 +10,10 @@ import core.Main;
 import sprites.Sprite;
 import sprites.Tower;
 
-public abstract class IMapManager<T>{
+public abstract class IManager<T>{
 	public List<T> list;
 	
-	public IMapManager()
+	public IManager()
 	{
 		list = new ArrayList<>();
 	}
