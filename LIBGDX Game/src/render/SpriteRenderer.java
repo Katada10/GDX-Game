@@ -13,10 +13,9 @@ import structs.Grid;
 public class SpriteRenderer {
 	private SpriteBatch batch;
 	
-	public void init()
+	public SpriteRenderer()
 	{
 		batch = new SpriteBatch();
-		
 	}
 
 	public void render(Sprite sprite)

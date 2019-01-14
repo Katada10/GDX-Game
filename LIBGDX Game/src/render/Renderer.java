@@ -2,22 +2,20 @@ package render;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-
-import core.Main;
 import map.GameMap;
 import sprites.Sprite;
-import structs.Grid;
-import structs.Tile;
+import ui.UIRenderer;
 
-public class Renderer extends SpriteRenderer{
+public class Renderer{
+	
+	SpriteRenderer spriterender;
+	UIRenderer uirender;
 	GameMap gameMap;
 	
 	public void init()
 	{
-		super.init();
+		spriterender = new SpriteRenderer();
+		uirender = new UIRenderer();
 		gameMap = new GameMap();
 		
 		Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -27,17 +25,18 @@ public class Renderer extends SpriteRenderer{
 	{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
+		uirender.draw();
 		gameMap.update();
-		
 		for (Sprite sprite : GameMap.sprites) {
-			super.render(sprite);
+			spriterender.render(sprite);
 		}
 	}
 	
 	
 	public void cleanUp()
 	{
-		super.dispose();
+		spriterender.dispose();
 		gameMap.dispose();
+		uirender.dispose();
 	}
 }

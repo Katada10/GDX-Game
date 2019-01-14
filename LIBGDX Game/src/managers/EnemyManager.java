@@ -13,7 +13,7 @@ import structs.Path;
 
 public class EnemyManager extends IManager<Enemy>{
 	boolean waveStarted = false, canSpawn = false;
-	private static int waveSize = 5, spacing = 1, counter = 0;
+	private static int waveSize = 10, spacing = 1, counter = 0;
 	
 	private Timer timer;
 

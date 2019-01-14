@@ -1,19 +1,26 @@
 package sprites;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.badlogic.gdx.Gdx;
-
-import managers.EnemyManager;
-import map.GameMap;
-import structs.Grid;
 
 public class Tower extends Sprite {
 	
 	public boolean shouldShoot = false, didDrawBullet = false;
-
+	public int maxAmmo = 4;
+	public List<Sprite> bullets;
+	public Sprite currentBullet;
+	
 	public Tower(int gridX, int gridY, int type) {
 		super("tower.png", gridX, gridY);
+		bullets = new ArrayList<>();
 		this.type = type;
+	}
+	
+	public Sprite createBullet(int x, int y)
+	{
+		Sprite bullet = new Sprite("bullet.png", x, y);
+		bullets.add(bullet);
+		currentBullet = bullet;
+		return bullet;
 	}
 }
