@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 public class Input implements InputProcessor {
 
 	public static int mouseX = 0, mouseY = 0;
-	public static boolean dragging = false; 
+	public static boolean dragging = false, shouldStartWave = false; 
 	
 	@Override
 	public boolean keyDown(int arg0) {
@@ -15,8 +15,11 @@ public class Input implements InputProcessor {
 	}
 
 	@Override
-	public boolean keyTyped(char arg0) {
-		// TODO Auto-generated method stub
+	public boolean keyTyped(char key) {
+		if(key == 'e' || key == 'E')
+		{
+			shouldStartWave = true;
+		}
 		return false;
 	}
 
