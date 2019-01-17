@@ -25,7 +25,7 @@ public class GameMap {
 
 	public GameMap() {
 		sprites = new ArrayList<>();
-		sprites.add(new Sprite("background.jpg"));
+		sprites.add(new Sprite("sand_back.jpg"));
 
 		Grid.init();
 		addObject(new Tower(4, 0, Sprite.MODEL), false);

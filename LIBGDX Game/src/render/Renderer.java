@@ -37,7 +37,6 @@ public class Renderer{
 		for (Sprite sprite : GameMap.sprites) {
 			spriterender.render(sprite);
 		}
-		
 		fontrender.render();
 	}
 	
