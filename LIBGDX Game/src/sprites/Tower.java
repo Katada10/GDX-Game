@@ -6,6 +6,10 @@ import java.util.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class Tower extends Sprite {
+	/*
+	 * Subclass of sprite which defines values that all towers use, and allows differentiation between
+	 * the original tower and other towers through "type".
+	 */
 	
 	public boolean shouldShoot = false, didDrawBullet = false;
 	public int maxAmmo = 4;
@@ -19,6 +23,12 @@ public class Tower extends Sprite {
 		this.type = type;
 	}
 	
+	/**
+	 * Adds a bullet to the list of bullets drawn(fired).
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Sprite createBullet(int x, int y)
 	{
 		Sprite bullet = new Sprite("bullet.png", x, y);

@@ -11,6 +11,9 @@ import sprites.Sprite;
 import sprites.Tower;
 
 public abstract class IManager<T>{
+	/*
+	 * An abstract class shared between the tower and enemy managers for similar methods and fields.
+	 */
 	public List<T> list;
 	
 	public IManager()

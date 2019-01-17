@@ -15,12 +15,23 @@ import structs.Grid;
 public class SpriteRenderer {
 	private SpriteBatch batch;
 	
+	/*
+	 * 
+	 * This class only handles rendering individual sprites, then another class loops through
+	 * a list of sprites and calls the render method on each one. 
+	 * 
+	 */
+	
 	public SpriteRenderer()
 	{
 		batch = new SpriteBatch();
 		
 	}
 	
+	/**
+	 * Renders a sprite onto the screen.
+	 * @param sprite
+	 */
 	public void render(Sprite sprite)
 	{
 		batch.begin();
@@ -28,11 +39,6 @@ public class SpriteRenderer {
 		batch.draw(sprite.getTexture(), sprite.getPos().x, sprite.getPos().y, sprite.scale, sprite.scale);
 		
 		batch.end();
-	}
-	
-	public void drawAnim(Animation anim, int x, int y, float time)
-	{
-		batch.draw(anim.getKeyFrame(time,true), x, y);
 	}
 	
 	public void dispose()

@@ -10,7 +10,11 @@ import sprites.Sprite;
 import sprites.Tower;
 import structs.Grid;
 
-public class BulletManager {
+public class BulletManager{
+	/*
+	 * This class handles the shooting of bullets at enemies, detecting range and 
+	 * sufficient ammo as well as removing killed enemies.
+	 */
 	private List<Tower> towers;
 	private List<Enemy> enemies;
 	
@@ -23,6 +27,9 @@ public class BulletManager {
 		this.enemies = enemies;
 	}
 	
+	/**
+	 * Counts ammo and calls the shoot method for each tower.
+	 */
 	public void update()
 	{
 		for (Tower tower : towers) {
@@ -32,6 +39,12 @@ public class BulletManager {
 		}
 	}
 
+	/**
+	 * For the given tower, loops through the list of enemies and checks their range,
+	 * then adds a bullet if ammo is available and calls the lead method.
+	 * @param tower
+	 * @param enemies
+	 */
 	private void shoot(Tower tower, List<Enemy> enemies) {
 		if (!tower.shouldShoot) {
 			for (Enemy enemy : enemies) {
@@ -55,6 +68,14 @@ public class BulletManager {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * Leads bullet from tower to enemy, detects collision with target then removes itself and target.
+	 * @param tower
+	 * @param bullet
+	 * @param enemy
+	 */
 	private void lead(Tower tower, Sprite bullet, Enemy enemy) {
 		float dx = enemy.position.x - bullet.position.x;
 		float dy = enemy.position.y - bullet.position.y;

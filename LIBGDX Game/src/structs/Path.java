@@ -4,16 +4,19 @@ import map.GameMap;
 import sprites.Sprite;
 
 public class Path {
+	/*
+	 * A class that manages placement of the path that the chickens will follow.
+	 */
 
 	public static int firstSizeX = 1, secondSizeX = 2, sizeY = 2;
-
-	private GameMap map;
 	
-	public Path(GameMap map)
-	{
-		this.map = map;
-	}
-	
+	/**
+	 * Method to draw either a vertical or horizontal segment of the path with the given parameters.
+	 * @param startLevel
+	 * @param startTile
+	 * @param endTile
+	 * @param yDirection
+	 */
 	private void drawPathSegment(int startLevel, int startTile, int endTile, boolean yDirection)
 	{
 		for (int i = startTile; i < endTile; i++) {
@@ -28,6 +31,9 @@ public class Path {
 		}
 	}
 	
+	/**
+	 * Draws all the segments correctly according to the grid size, which is reliant on screen scale.
+	 */
 	public void draw() {
 		drawPathSegment(1, 0, firstSizeX, false);
 		drawPathSegment(sizeY + 1, firstSizeX + 1, secondSizeX + (firstSizeX + 1), false);

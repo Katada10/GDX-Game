@@ -7,12 +7,17 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
  *
  */
 public class Main {
+	
+	/*
+	 * This is the main class which starts the game logic and sets window preferences.
+	 * 
+	 */
 	public static final int SCALE = 800;
 	
 	public static void main(String[] args)
 	{
 		LwjglApplicationConfiguration cfg =  new LwjglApplicationConfiguration();
-		cfg.title = "Dawn Of The Chickens V 0.0 Alpha";
+		cfg.title = "Chicken Tower Defense V 1.0 Release";
 		cfg.width = SCALE;
 		cfg.height = SCALE;
 		cfg.resizable = false;

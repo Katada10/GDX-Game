@@ -1,6 +1,9 @@
 package structs;
 
 public class Tile {
+	/*
+	 * A definition for a tile in the grid.
+	 */
 	public int x, y;
 	public int xCoord, yCoord;
 	public boolean isEmpty;

@@ -12,26 +12,35 @@ import structs.Tile;
 import ui.FontRender;
 
 public class TowerManager extends IManager<Tower> {
+	/*
+	 * 
+	 * This class handles tower placement and checking for sufficient funds to buy a tower.
+	 */
 	boolean towerSelected = false;
 	Label moneyLabel;
-	int money = 150, cost = 20;
+	int currentMoney = 150, cost = 20;
 	Tower toDrag = null;
 
 	public TowerManager() {
 		super();
-		moneyLabel = FontRender.addFont("Money: " + money, 700, 750);
+		moneyLabel = FontRender.addFont("Money: " + currentMoney, 700, 750);
 	}
 
+	/**
+	 * Checks for sufficient money to place a tower then places it and replaces the original tower,
+	 * also updates the money as towers are placed.
+	 * 
+	 */
 	public void update() {
 		Tile t = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
 
 		if (Input.dragging && !towerSelected) {
-			if (t.xCoord == GameMap.sprites.get(1).getGridX() && t.yCoord == GameMap.sprites.get(1).getGridY() && money >= cost) {
+			if (t.xCoord == GameMap.sprites.get(1).getGridX() && t.yCoord == GameMap.sprites.get(1).getGridY() && currentMoney >= cost) {
 				toDrag = (Tower) GameMap.addObject(new Tower(4, 0, Sprite.TOWER), false);
 				list.add(toDrag);
 				towerSelected = true;
 
-				money-=cost;
+				currentMoney-=cost;
 			}
 		}
 
@@ -46,9 +55,16 @@ public class TowerManager extends IManager<Tower> {
 			towerSelected = false;
 		}
 
-		moneyLabel.setText("Money: " + money);
+		moneyLabel.setText("Money: " + currentMoney);
 	}
 
+	
+	/**
+	 * Responsible for moving a tower from the original position onto the correct grid position
+	 * when dragged by the mouse. Checks that the new tile it will be dragged to is empty.(No other
+	 * towers or path)
+	 * @param tower
+	 */
 	public void drag(Tower tower) {
 		Tile newTile = Grid.getTile(new Vector2(Input.mouseX, Input.mouseY));
 		Tile currentTile = Grid.tiles[(int) toDrag.getGridY()][(int) toDrag.getGridX()];

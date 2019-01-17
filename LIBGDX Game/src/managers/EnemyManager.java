@@ -15,11 +15,17 @@ import structs.Path;
 import ui.FontRender;
 
 public class EnemyManager extends IManager<Enemy> {
+	/*
+	 * 
+	 * This class manages enemy waves and movement to ensure they follow the path and 
+	 * increases wave size and speed.
+	 * 
+	 */
 	boolean waveStarted = false, canSpawn = false;
 
 	static int waveNumber = 0;
 	private long spacing = 2000;
-	private static int waveSize = 3, counter = 0;
+	private static int waveSize = 3, enemyCounter = 0;
 
 	public Label instructLabel;
 	private Timer timer;
@@ -28,10 +34,13 @@ public class EnemyManager extends IManager<Enemy> {
 		super();
 		timer = new Timer();
 
-		instructLabel = FontRender.addFont("Press e to start first wave", Grid.tileSize * ((Grid.len / 2) - 3.5f),
-				750);
+		instructLabel = FontRender.addFont("Press e to start first wave", Grid.tileSize * ((Grid.length / 2) - 3.5f), 750);
 	}
 
+	/**
+	 * Handles enemy spawning, wave count, and difficulty.
+	 * Leads spawned sprites through the path.
+	 */
 	public void update() {
 		if (!waveStarted && Input.shouldStartWave) {
 			waveStarted = true;
@@ -45,21 +54,21 @@ public class EnemyManager extends IManager<Enemy> {
 			}, 0, spacing);
 
 		} else {
-			if (counter < waveSize && Input.shouldStartWave) {
+			if (enemyCounter < waveSize && Input.shouldStartWave) {
 				if (canSpawn) {
-					counter++;
+					enemyCounter++;
 					Enemy s = (Enemy) GameMap.addObject(new Enemy(0, 1), false);
 					list.add(s);
 					instructLabel.setText("Wave Number: " + (waveNumber + 1));
 					canSpawn = false;
 				}
-			} else if (counter == waveSize && list.size() == 0) {
+			} else if (enemyCounter == waveSize && list.size() == 0) {
 				waveNumber++;
-				instructLabel.setText("Press e to start wave "+ (waveNumber + 1));
+				instructLabel.setText("Press e to start wave " + (waveNumber + 1));
 				waveSize = (waveNumber + 1) * 2;
 				spacing -= 50;
 				Input.shouldStartWave = false;
-				counter = 0;
+				enemyCounter = 0;
 			}
 			for (Enemy sprite : list) {
 				lead(sprite);
@@ -67,6 +76,10 @@ public class EnemyManager extends IManager<Enemy> {
 		}
 	}
 
+	/**
+	 * This method takes sprite and moves it through the path.
+	 * @param sprite
+	 */
 	public void lead(Enemy sprite) {
 		try {
 			if (sprite.position.x < Path.firstSizeX * Grid.tileSize) {

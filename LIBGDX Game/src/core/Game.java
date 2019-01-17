@@ -6,6 +6,12 @@ import com.badlogic.gdx.Gdx;
 import render.Renderer;
 
 public class Game extends ApplicationAdapter{
+	
+	/*
+	 * 
+	 * This class contains high level logic for running the game, 
+	 * initializing, running, and then cleaning up.
+	 */
 	private Renderer renderer;
 	
 	public Game()

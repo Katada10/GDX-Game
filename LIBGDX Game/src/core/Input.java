@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 public class Input implements InputProcessor {
+	/*
+	 * This class handles values linked to keyboard and mouse input and updates 
+	 * them accordingly.
+	 */
 
 	public static int mouseX = 0, mouseY = 0;
 	public static boolean dragging = false, shouldStartWave = false; 
