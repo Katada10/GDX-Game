@@ -47,7 +47,7 @@ public class BulletManager {
 		} else {
 			if (!tower.didDrawBullet && tower.bullets.size() < tower.maxAmmo) {
 				tower.createBullet(tower.getGridX(), tower.getGridY());
-				GameMap.addObject(tower.currentBullet);
+				GameMap.addObject(tower.currentBullet, true);
 				tower.didDrawBullet = true;
 			}
 			if(GameMap.sprites.contains(tower.currentBullet))

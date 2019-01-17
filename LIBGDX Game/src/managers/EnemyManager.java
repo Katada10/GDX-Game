@@ -48,7 +48,7 @@ public class EnemyManager extends IManager<Enemy> {
 			if (counter < waveSize && Input.shouldStartWave) {
 				if (canSpawn) {
 					counter++;
-					Enemy s = (Enemy) GameMap.addObject(new Enemy(0, 1));
+					Enemy s = (Enemy) GameMap.addObject(new Enemy(0, 1), false);
 					list.add(s);
 					instructLabel.setText("Wave Number: " + (waveNumber + 1));
 					canSpawn = false;

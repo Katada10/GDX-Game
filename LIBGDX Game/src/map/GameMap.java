@@ -28,10 +28,10 @@ public class GameMap {
 		sprites.add(new Sprite("background.jpg"));
 
 		Grid.init();
-		addObject(new Tower(4, 0, Sprite.MODEL));
+		addObject(new Tower(4, 0, Sprite.MODEL), false);
 		
-		new Path(this).draw();
 		drawGrid();
+		new Path(this).draw();
 	
 		
 		enemyManager = new EnemyManager();
@@ -39,9 +39,13 @@ public class GameMap {
 		shooter = new BulletManager(towerManager.list, enemyManager.list);
 	}
 
-	public static Sprite addObject(Sprite sprite) {
-		sprites.add(sprite);
+	public static Sprite addObject(Sprite sprite, boolean empty) {
+		Tile t = Grid.tiles[sprite.getGridY()][sprite.getGridX()];
 		
+		t.isEmpty = empty;
+		
+		sprites.add(sprite);
+
 		return sprite;
 	}
 	
@@ -49,7 +53,7 @@ public class GameMap {
 		
 		for (int i = 1; i < Grid.tiles.length; i++) {
 			for (int j = 0; j < Grid.tiles[i].length; j++) {
-				addObject(new Sprite("square.png", j, i));
+				addObject(new Sprite("square.png", j, i), true);
 			}
 		}
 	}
