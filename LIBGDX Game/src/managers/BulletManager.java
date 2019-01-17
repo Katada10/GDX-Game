@@ -26,6 +26,8 @@ public class BulletManager {
 	public void update()
 	{
 		for (Tower tower : towers) {
+			if(tower.ammoLabel != null)
+				tower.ammoLabel.setText("Ammo: " + (tower.maxAmmo - tower.bullets.size()));
 			shoot(tower, enemies);
 		}
 	}

@@ -8,6 +8,7 @@ import sprites.Sprite;
 import sprites.Tower;
 import structs.Grid;
 import structs.Tile;
+import ui.FontRender;
 
 public class TowerManager extends IManager<Tower> {
 	boolean towerSelected = false;
@@ -30,6 +31,10 @@ public class TowerManager extends IManager<Tower> {
 
 		if (towerSelected && Input.dragging) {
 			drag(toDrag);
+		}
+		else if(towerSelected && !Input.dragging)
+		{
+			toDrag.ammoLabel = FontRender.addFont("", toDrag.position.x + 10, toDrag.position.y + toDrag.scale + 10);
 		}
 
 		if (!Input.dragging) {

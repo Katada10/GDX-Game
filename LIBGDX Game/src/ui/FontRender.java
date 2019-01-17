@@ -28,7 +28,7 @@ public class FontRender {
 		BitmapFont font = new BitmapFont();
 		LabelStyle style = new LabelStyle(font, Color.BLACK);
 		Label label = new Label(text, style);
-		label.setFontScale(2);
+		label.setFontScale(1);
 		label.setPosition(x, y);
 		stage.addActor(label);
 		return label;
