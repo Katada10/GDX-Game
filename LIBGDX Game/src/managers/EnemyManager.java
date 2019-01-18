@@ -17,11 +17,12 @@ import ui.FontRender;
 public class EnemyManager extends IManager<Enemy> {
 	/*
 	 * 
-	 * This class manages enemy waves and movement to ensure they follow the path and 
-	 * increases wave size and speed.
+	 * This class manages enemy waves and movement to ensure they follow the path
+	 * and increases wave size and speed.
 	 * 
 	 */
 	boolean waveStarted = false, canSpawn = false;
+	boolean canDeductFunds = false;
 
 	static int waveNumber = 0;
 	private long spacing = 2000;
@@ -34,12 +35,13 @@ public class EnemyManager extends IManager<Enemy> {
 		super();
 		timer = new Timer();
 
-		instructLabel = FontRender.addFont("Press e to start first wave", Grid.tileSize * ((Grid.length / 2) - 3.5f), 750);
+		instructLabel = FontRender.addFont("Press e to start first wave", Grid.tileSize * ((Grid.length / 2) - 3.5f),
+				750);
 	}
 
 	/**
-	 * Handles enemy spawning, wave count, and difficulty.
-	 * Leads spawned sprites through the path.
+	 * Handles enemy spawning, wave count, and difficulty. Leads spawned sprites
+	 * through the path.
 	 */
 	public void update() {
 		if (!waveStarted && Input.shouldStartWave) {
@@ -78,6 +80,8 @@ public class EnemyManager extends IManager<Enemy> {
 
 	/**
 	 * This method takes sprite and moves it through the path.
+	 * If the sprite reaches the end of the path, money is deducted from the player.
+	 * 
 	 * @param sprite
 	 */
 	public void lead(Enemy sprite) {
@@ -92,6 +96,17 @@ public class EnemyManager extends IManager<Enemy> {
 				sprite.position.y -= (sprite.speed / Gdx.graphics.getDeltaTime());
 			} else if (sprite.position.x < (9 - (Path.firstSizeX + Path.secondSizeX - 1)) * Grid.tileSize) {
 				sprite.position.x += (sprite.speed / Gdx.graphics.getDeltaTime());
+			} else {
+				if (!sprite.reachedEnd) {
+					sprite.reachedEnd = true;
+					canDeductFunds = true;
+				}
+			}
+			
+			if(sprite.reachedEnd && canDeductFunds)
+			{
+				canDeductFunds = false;
+				TowerManager.currentMoney -= 10;
 			}
 		} catch (Exception e) {
 			System.out.println(e);
