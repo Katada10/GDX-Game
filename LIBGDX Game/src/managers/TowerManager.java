@@ -18,7 +18,7 @@ public class TowerManager extends IManager<Tower> {
 	 */
 	boolean towerSelected = false;
 	Label moneyLabel;
-	int currentMoney = 150, cost = 20;
+	public static int currentMoney = 150, cost = 50;
 	Tower toDrag = null;
 
 	public TowerManager() {

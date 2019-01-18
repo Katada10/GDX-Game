@@ -12,7 +12,7 @@ public class Tower extends Sprite {
 	 */
 	
 	public boolean shouldShoot = false, didDrawBullet = false;
-	public int maxAmmo = 4;
+	public int maxAmmo = 5;
 	public List<Sprite> bullets;
 	public Sprite currentBullet;
 	public Label ammoLabel;

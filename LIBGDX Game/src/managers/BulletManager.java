@@ -70,8 +70,8 @@ public class BulletManager{
 
 	
 	/**
-	 * 
 	 * Leads bullet from tower to enemy, detects collision with target then removes itself and target.
+	 * Also adds money when chickens are killed.
 	 * @param tower
 	 * @param bullet
 	 * @param enemy
@@ -90,7 +90,7 @@ public class BulletManager{
 			enemies.remove(enemy);
 			GameMap.sprites.remove(bullet);
 
-
+			TowerManager.currentMoney += 5;
 			tower.shouldShoot = false;
 			tower.didDrawBullet = false;
 		}
